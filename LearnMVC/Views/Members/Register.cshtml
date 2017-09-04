@@ -1,0 +1,18 @@
+﻿@model MembersRegisterVM
+
+<form asp-controller="Members" asp-action="Register">
+    <label asp-for="UserName"></label>
+    <input asp-for="UserName" />
+    <span asp-validation-for="UserName"></span>
+    <br />
+    <label asp-for="Email"></label>
+    <input asp-for="Email" />
+    <span asp-validation-for="Email"></span>
+    <br />
+    <label asp-for="Password"></label>
+    <input asp-for="Password" />
+    <span asp-validation-for="Password"></span>
+
+    <br />
+    <input type="submit" />
+</form>

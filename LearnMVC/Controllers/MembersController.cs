@@ -97,11 +97,21 @@ namespace LearnMVC.Controllers
             return View();
         }
 
-        [AllowAnonymous]
         [HttpPost]
-        public IActionResult Login(MembersLoginVM model)
+        [AllowAnonymous]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> Login(MembersLoginVM model)
         {
-            return View();
+            var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
+            if (!result.Succeeded)
+                ModelState.AddModelError(nameof(MembersLoginVM.UserName), result.ToString());
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

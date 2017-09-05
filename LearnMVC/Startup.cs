@@ -9,6 +9,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
+using LearnMVC.Models.Entities;
 
 namespace LearnMVC
 {
@@ -18,7 +19,9 @@ namespace LearnMVC
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            // todo - lägg connection string i secrets
             var connString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Pärsky;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+            services.AddDbContext<QuizDbContext>(o => o.UseSqlServer(connString));
             services.AddDbContext<IdentityDbContext>(o => o.UseSqlServer(connString));
 
             services.AddIdentity<IdentityUser, IdentityRole>()

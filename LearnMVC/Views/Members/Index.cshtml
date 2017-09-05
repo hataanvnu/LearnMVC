@@ -1,0 +1,29 @@
+﻿@model MembersIndexVM
+
+<h2>Välkommen @Model.UserName</h2>
+<br />
+
+@if (Model.HasPreviousProgress)
+{
+    <div>
+        <br />
+        Progress:
+        <br />
+        <br />
+        Category: @Model.CategoryName
+        <br />
+        Quiz-Unit: @Model.QuizUnitName
+        <br />
+        Question: @Model.QuestionNumber
+        <br />
+
+        <a>Vill du fortsätta där du avslutade? Tryck här! (Eller inte, den funkar inte...)</a>
+    </div>
+}
+else
+{
+    <div>
+        Du verkar inte ha varit här förut. Tryck på en utav kategorierna till högeer för att dra igång!
+    </div>
+
+}

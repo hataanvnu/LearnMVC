@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using LearnMVC.Models.View_Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using LearnMVC.Models.Entities;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -19,39 +20,37 @@ namespace LearnMVC.Controllers
         UserManager<IdentityUser> userManager;
         SignInManager<IdentityUser> signInManager;
         IdentityDbContext identityContext;
+        QuizDbContext context;
 
         public MembersController(
             UserManager<IdentityUser> userManager,
             SignInManager<IdentityUser> signInManager,
-            IdentityDbContext identityContext)
+            IdentityDbContext identityContext,
+            QuizDbContext context)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
             this.identityContext = identityContext;
+            this.context = context;
         }
 
 
 
 
         // GET: /<controller>/
-        public string Index()
+        public IActionResult Index()
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return $"Välkommen {User.Identity.Name}";
-            }
-            else
-            {
-                return "User not logged in";
+            string memberID = userManager.GetUserId(User);
 
-            }
+            var membersIndexVM = context.GetMembersIndexVMById(memberID, User.Identity.Name);
+
+            return View(membersIndexVM);
         }
 
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Register()
         {
-
             return View();
         }
 
@@ -102,14 +101,16 @@ namespace LearnMVC.Controllers
         //[ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(MembersLoginVM model)
         {
-            var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
-            if (!result.Succeeded)
-                ModelState.AddModelError(nameof(MembersLoginVM.UserName), result.ToString());
-
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
+
+            var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
+            if (!result.Succeeded)
+                ModelState.AddModelError(nameof(MembersLoginVM.UserName), result.ToString());
+
+            // Todo - Kolla om den som loggade in var en admin och skicka i så fall till /Admin/Index istället
 
             return RedirectToAction(nameof(Index));
         }

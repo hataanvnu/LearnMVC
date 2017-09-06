@@ -14,11 +14,11 @@
         <br />
         Quiz-Unit: @Model.QuizUnitName
         <br />
-        Question: @Model.QuestionNumber
+        Question: @Model.QuestionText
         <br />
 
 
-        <a>Vill du fortsätta där du avslutade? Tryck här! (Eller inte, den funkar inte än...)</a>
+        <a asp-controller="Quiz" asp-action="Question" asp-route-id="@Model.QuestionID">Vill du fortsätta där du avslutade? Tryck här!</a>
     </div>
     }
     else

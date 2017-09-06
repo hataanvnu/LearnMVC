@@ -41,12 +41,14 @@ namespace LearnMVC.Models.Entities
                 string categoryTitle = latestProgress.Question.QuizUnit.Category.Title;
                 string quizUnitTitle = latestProgress.Question.QuizUnit.InfoTextHeader;
                 string questionTitle = latestProgress.Question.QuestionText;
+                int questionId = latestProgress.Question.QuestionId;
 
                 membersIndexVM = new MembersIndexVM
                 {
                     HasPreviousProgress = true,
                     CategoryName = categoryTitle,
-                    QuestionNumber = questionTitle,
+                    QuestionText = questionTitle,
+                    QuestionID = questionId,
                     QuizUnitName = quizUnitTitle,
                     UserName = userName,
                 };
@@ -67,6 +69,31 @@ namespace LearnMVC.Models.Entities
             }).ToArray();
 
             return q;
+        }
+
+        public QuizTextVM GetQuizTextVMById(int id)
+        {
+            // todo - lägg till logik för att välja rätt quizunit, nu väljer den första som den hittar
+
+            var qt = Category
+                .Include(o => o.QuizUnit)
+                .Where(c => c.CategoryId == id)
+                .Select(c => new QuizTextVM
+                {
+                    CategoryName = c.Title,
+                    TextHeader = c.QuizUnit.First().InfoTextHeader,
+                    TextContent = c.QuizUnit.First().InfoTextContent,
+                })
+                .FirstOrDefault();
+
+            return qt;
+        }
+
+        public string GetCategoryTitleById(int id)
+        {
+            return Category
+                .SingleOrDefault(c => c.CategoryId == id)
+                .Title;
         }
     }
 }

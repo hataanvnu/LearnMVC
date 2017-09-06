@@ -111,7 +111,10 @@ namespace LearnMVC.Controllers
 
             var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
             if (!result.Succeeded)
+            {
                 ModelState.AddModelError(nameof(MembersLoginVM.UserName), result.ToString());
+                return View(model);
+            }
 
             // Todo - Kolla om den som loggade in var en admin och skicka i så fall till /Admin/Index istället
 

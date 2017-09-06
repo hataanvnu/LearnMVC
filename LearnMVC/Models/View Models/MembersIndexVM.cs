@@ -13,7 +13,9 @@ namespace LearnMVC.Models.View_Models
 
         public string QuizUnitName { get; set; }
 
-        public string QuestionNumber { get; set; }
+        public string QuestionText { get; set; }
+
+        public int QuestionID { get; set; }
 
         public bool HasPreviousProgress { get; set; }
 

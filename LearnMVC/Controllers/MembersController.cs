@@ -107,6 +107,7 @@ namespace LearnMVC.Controllers
             {
                 return View(model);
             }
+            await signInManager.SignOutAsync();
 
             var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
             if (!result.Succeeded)

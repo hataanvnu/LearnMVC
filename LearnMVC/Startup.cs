@@ -10,17 +10,26 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using LearnMVC.Models.Entities;
+using Microsoft.Extensions.Configuration;
 
 namespace LearnMVC
 {
     public class Startup
     {
+        IConfiguration configuration;
+
+        public Startup(IConfiguration configuration)
+        {
+            this.configuration = configuration;
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
             // todo - lägg connection string i secrets
-            var connString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Pärsky;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+            var connString = configuration["connString"];
             services.AddDbContext<QuizDbContext>(o => o.UseSqlServer(connString));
             services.AddDbContext<IdentityDbContext>(o => o.UseSqlServer(connString));
 

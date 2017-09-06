@@ -57,20 +57,16 @@ namespace LearnMVC.Models.Entities
 
         internal SidebarVM[] GetSidebarVMList(string memberID)
         {
-            // todo - returnera infon till sidebaren
-            var q = Category.OrderBy(c => c.Order);
-            List<SidebarVM> returnList = new List<SidebarVM>();
-
-            foreach (var item in q)
+            var q = Category
+                .OrderBy(c => c.Order)
+                .Select(c => new SidebarVM
             {
-                returnList.Add(new SidebarVM
-                {
-                    CategoryID = item.CategoryId,
-                    CategoryName = item.Title,
-                    IsDone = false, // todo - lägg till logik för detta.
-                });
-            }
-            return returnList.ToArray();
+                CategoryID = c.CategoryId,
+                CategoryName = c.Title,
+                IsDone = false, // todo - lägg till logik för detta.
+            }).ToArray();
+
+            return q;
         }
     }
 }

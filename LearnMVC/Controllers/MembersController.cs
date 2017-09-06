@@ -44,6 +44,8 @@ namespace LearnMVC.Controllers
 
             var membersIndexVM = context.GetMembersIndexVMById(memberID, User.Identity.Name);
 
+            //membersIndexVM.SidebarVMList = context.GetSidebarVMList(memberID);
+
             return View(membersIndexVM);
         }
 

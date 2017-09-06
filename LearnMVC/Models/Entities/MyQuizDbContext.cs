@@ -53,5 +53,11 @@ namespace LearnMVC.Models.Entities
 
             return membersIndexVM;
         }
+
+        internal SidebarVM[] GetSidebarVMList(string memberID)
+        {
+            // todo - returnera infon till sidebaren
+            throw new NotImplementedException();
+        }
     }
 }

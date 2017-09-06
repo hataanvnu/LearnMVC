@@ -1,4 +1,5 @@
 ﻿using System;
+using LearnMVC.Models.View_Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 

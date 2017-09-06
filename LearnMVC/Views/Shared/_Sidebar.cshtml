@@ -1,0 +1,13 @@
+﻿@model SidebarVM[]
+<ul>
+    @foreach (var category in Model)
+    {
+        <li>
+            @if (category.IsDone)
+            {
+                <span>KLAR!</span>
+            }
+            <a asp-controller="Home" asp-action="TestQuiz" asp-route-id="@category.CategoryID">@category.CategoryName</a>
+        </li>
+    }
+</ul>

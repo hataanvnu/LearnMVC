@@ -12,6 +12,7 @@ namespace LearnMVC.Models.Entities
 
         public int CategoryId { get; set; }
         public string Title { get; set; }
+        public int Order { get; set; }
 
         public ICollection<QuizUnit> QuizUnit { get; set; }
     }

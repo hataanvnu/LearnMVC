@@ -14,6 +14,7 @@ namespace LearnMVC.Models.Entities
         public int QuestionId { get; set; }
         public string QuestionText { get; set; }
         public int? QuizUnitId { get; set; }
+        public int Order { get; set; }
 
         public QuizUnit QuizUnit { get; set; }
         public ICollection<Answer> Answer { get; set; }

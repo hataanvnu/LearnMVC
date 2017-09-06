@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using LearnMVC.Models.View_Models;
 using System.Linq;
+using System.Collections.Generic;
 
 namespace LearnMVC.Models.Entities
 {
@@ -57,7 +58,19 @@ namespace LearnMVC.Models.Entities
         internal SidebarVM[] GetSidebarVMList(string memberID)
         {
             // todo - returnera infon till sidebaren
-            throw new NotImplementedException();
+            var q = Category.OrderBy(c => c.Order);
+            List<SidebarVM> returnList = new List<SidebarVM>();
+
+            foreach (var item in q)
+            {
+                returnList.Add(new SidebarVM
+                {
+                    CategoryID = item.CategoryId,
+                    CategoryName = item.Title,
+                    IsDone = false, // todo - lägg till logik för detta.
+                });
+            }
+            return returnList.ToArray();
         }
     }
 }

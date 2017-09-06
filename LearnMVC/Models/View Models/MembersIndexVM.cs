@@ -17,6 +17,6 @@ namespace LearnMVC.Models.View_Models
 
         public bool HasPreviousProgress { get; set; }
 
-        //public SidebarVM[] SidebarVMList { get; set; }
+        public SidebarVM[] SidebarVMList { get; set; }
     }
 }

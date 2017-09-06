@@ -1,5 +1,4 @@
 ﻿using System;
-using LearnMVC.Models.View_Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -18,7 +17,7 @@ namespace LearnMVC.Models.Entities
             if (!optionsBuilder.IsConfigured)
             {
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
-                optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Pärsky;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
+                optionsBuilder.UseSqlServer(@"Data Source=parskyserver.database.windows.net;Initial Catalog=Parsky;Integrated Security=False;User ID=Parsky;Password=Johan1234;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False");
             }
         }
 
@@ -37,12 +36,16 @@ namespace LearnMVC.Models.Entities
                 entity.HasOne(d => d.Question)
                     .WithMany(p => p.Answer)
                     .HasForeignKey(d => d.QuestionId)
-                    .HasConstraintName("FK__Answer__Question__3F466844");
+                    .HasConstraintName("FK__Answer__Question__14270015");
             });
 
             modelBuilder.Entity<Category>(entity =>
             {
                 entity.ToTable("Category", "Quiz");
+
+                entity.HasIndex(e => e.Order)
+                    .HasName("UQ__Category__67A3D86C55BAA82F")
+                    .IsUnique();
 
                 entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
 
@@ -66,7 +69,7 @@ namespace LearnMVC.Models.Entities
                 entity.HasOne(d => d.Question)
                     .WithMany(p => p.Progress)
                     .HasForeignKey(d => d.QuestionId)
-                    .HasConstraintName("FK__Progress__Questi__48CFD27E");
+                    .HasConstraintName("FK__Progress__Questi__17036CC0");
             });
 
             modelBuilder.Entity<Question>(entity =>
@@ -82,16 +85,12 @@ namespace LearnMVC.Models.Entities
                 entity.HasOne(d => d.QuizUnit)
                     .WithMany(p => p.Question)
                     .HasForeignKey(d => d.QuizUnitId)
-                    .HasConstraintName("FK__Question__QuizUn__3C69FB99");
+                    .HasConstraintName("FK__Question__QuizUn__114A936A");
             });
 
             modelBuilder.Entity<QuizUnit>(entity =>
             {
                 entity.ToTable("QuizUnit", "Quiz");
-
-                entity.HasIndex(e => e.Order)
-                    .HasName("UQ__QuizUnit__67A3D86C14238A02")
-                    .IsUnique();
 
                 entity.Property(e => e.QuizUnitId).HasColumnName("QuizUnitID");
 
@@ -100,7 +99,7 @@ namespace LearnMVC.Models.Entities
                 entity.HasOne(d => d.Category)
                     .WithMany(p => p.QuizUnit)
                     .HasForeignKey(d => d.CategoryId)
-                    .HasConstraintName("FK__QuizUnit__Catego__398D8EEE");
+                    .HasConstraintName("FK__QuizUnit__Catego__0E6E26BF");
             });
         }
     }

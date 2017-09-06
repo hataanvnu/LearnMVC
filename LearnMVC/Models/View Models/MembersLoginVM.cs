@@ -8,11 +8,12 @@ namespace LearnMVC.Models.View_Models
 {
     public class MembersLoginVM
     {
-        [Required]
+        [Required(ErrorMessage = "You must provide a user name.")]
+        [Display(Name = "Username")]
         public string UserName { get; set; }
 
         [DataType(DataType.Password)]
-        [Required]
+        [Required(ErrorMessage = "You must provide a password.")]
         public string Password { get; set; }
     }
 }

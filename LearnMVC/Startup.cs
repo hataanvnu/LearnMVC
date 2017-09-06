@@ -16,20 +16,20 @@ namespace LearnMVC
 {
     public class Startup
     {
-        //IConfiguration configuration;
+        IConfiguration configuration;
 
-        //public Startup(IConfiguration configuration)
-        //{
-        //    //var builder = new ConfigurationBuilder();
-        //    //if (env.IsDevelopment())
-        //    //    builder.AddUserSecrets<Startup>();
-        //    //else
-        //      //  builder.AddEnvironmentVariables();
+        public Startup(IConfiguration configuration)
+        {
+            //var builder = new ConfigurationBuilder();
+            //if (env.IsDevelopment())
+            //    builder.AddUserSecrets<Startup>();
+            //else
+            //  builder.AddEnvironmentVariables();
 
-        //    //this.configuration = builder.Build();
+            //this.configuration = builder.Build();
 
-        //    this.configuration = configuration;
-        //}
+            this.configuration = configuration;
+        }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940

@@ -12,18 +12,18 @@ namespace LearnMVC.Controllers
 {
     public class HomeController : Controller
     {
-        IConfiguration conf;
+        //IConfiguration conf;
 
-        public HomeController(IConfiguration configuration)
-        {
-            conf = configuration;
-        }
+        //public HomeController(IConfiguration configuration)
+        //{
+        //    conf = configuration;
+        //}
 
-        // GET: /<controller>/
-        public string Index()
-        {
-            return conf["connString"];
-        }
+        //// GET: /<controller>/
+        //public string Index()
+        //{
+        //    return "connstring:" + conf.GetConnectionString("DefaultConnection");
+        //}
 
         [Authorize]
         public string TestQuiz(int id)

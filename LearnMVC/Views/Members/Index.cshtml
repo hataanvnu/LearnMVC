@@ -1,33 +1,32 @@
 ﻿@model MembersIndexVM
+<div class="container">
+    <h2>Välkommen @Model.UserName</h2>
+    <br />
 
-<h2>Välkommen @Model.UserName</h2>
-<br />
-
-@if (Model.HasPreviousProgress)
-{
-    <div>
-        <br />
-        Progress:
-        <br />
-        <br />
-        Category: @Model.CategoryName
-        <br />
-        Quiz-Unit: @Model.QuizUnitName
-        <br />
-        Question: @Model.QuestionNumber
-        <br />
-
-        
-        <a>Vill du fortsätta där du avslutade? Tryck här! (Eller inte, den funkar inte än...)</a>
-    </div>
-}
-else
-{
-    <div>
-        Du verkar inte ha varit här förut. Tryck på en utav kategorierna till högeer för att dra igång!
-    </div>
-}
+    @if (Model.HasPreviousProgress)
+    {
+        <div>
+            <br />
+            Progress:
+            <br />
+            <br />
+            Category: @Model.CategoryName
+            <br />
+            Quiz-Unit: @Model.QuizUnitName
+            <br />
+            Question: @Model.QuestionNumber
+            <br />
 
 
+            <a>Vill du fortsätta där du avslutade? Tryck här! (Eller inte, den funkar inte än...)</a>
+        </div>
+    }
+    else
+    {
+        <div>
+            Du verkar inte ha varit här förut. Tryck på en utav kategorierna till höger för att dra igång!
+        </div>
+    }
+</div> <!--END CONTAINER-->
 @*@Html.Partial("_Sidebar", Model.SidebarVMList)*@
 

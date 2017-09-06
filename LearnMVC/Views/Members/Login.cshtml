@@ -1,17 +1,22 @@
 ﻿@model MembersLoginVM
 
-<form asp-controller="Members" asp-action="Login">
-    <label asp-for="UserName"></label>
-    <input asp-for="UserName" />
-    <span asp-validation-for="UserName"></span>
+<div class="container" id="loginbox">
+    <h3>Log in</h3>
     <br />
 
-    <label asp-for="Password"></label>
-    <input asp-for="Password" />
-    <span asp-validation-for="Password"></span>
+    <form asp-controller="Members" asp-action="Login">
+        <label asp-for="UserName"></label>
+        <input asp-for="UserName" />
+        <span asp-validation-for="UserName"></span>
+        <br />
+
+        <label asp-for="Password"></label>
+        <input asp-for="Password" />
+        <span asp-validation-for="Password"></span>
+        <br />
+
+        <input type="submit" />
+    </form>
     <br />
-
-    <input type="submit" />
-</form>
-
-<a asp-controller="Members" asp-action="Register">Skapa konto</a>
+    <a asp-controller="Members" asp-action="Register">Not a member yet? Join us now!</a>
+</div>

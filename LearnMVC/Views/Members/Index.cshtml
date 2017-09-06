@@ -1,10 +1,10 @@
 ﻿@model MembersIndexVM
+<div class="container">
+    <h2>Välkommen @Model.UserName</h2>
+    <br />
 
-<h2>Välkommen @Model.UserName</h2>
-<br />
-
-@if (Model.HasPreviousProgress)
-{
+    @if (Model.HasPreviousProgress)
+    {
     <div>
         <br />
         Progress:
@@ -17,17 +17,17 @@
         Question: @Model.QuestionNumber
         <br />
 
-        
+
         <a>Vill du fortsätta där du avslutade? Tryck här! (Eller inte, den funkar inte än...)</a>
     </div>
-}
-else
-{
+    }
+    else
+    {
     <div>
         Du verkar inte ha varit här förut. Tryck på en utav kategorierna till högeer för att dra igång!
     </div>
-}
+    }
 
-
-@Html.Partial("_Sidebar", Model.SidebarVMList)
+</div> <!--END CONTAINER-->
+@*@Html.Partial("_Sidebar", Model.SidebarVMList)*@
 

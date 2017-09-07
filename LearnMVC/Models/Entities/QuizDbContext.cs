@@ -106,5 +106,7 @@ namespace LearnMVC.Models.Entities
                     .HasConstraintName("FK__QuizUnit__Catego__0E6E26BF");
             });
         }
+
+
     }
 }

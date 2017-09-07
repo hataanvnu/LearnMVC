@@ -12,5 +12,7 @@ namespace LearnMVC.Models.View_Models
         public string TextHeader { get; set; }
 
         public string TextContent { get; set; }
+
+        public int QuizUnitId { get; set; }
     }
 }

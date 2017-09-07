@@ -108,35 +108,103 @@ namespace LearnMVC.Models.Entities
             return q;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="QuizUnitId"></param>
+        /// <param name="memberId"></param>
+        /// <returns>Returns null if there are no more questions in this quis-unit</returns>
+        public QuizQuestionVM GetNextQuestion(int QuizUnitId, string memberId)
+        {
+            // Todo - Se till att den behandlar first, last och middle elements
+            var doneQuestionsInQuizUnitForMember = Progress
+                .Where(p => p.MemberId == memberId)
+                .Where(p => p.Question.QuizUnitId == QuizUnitId);
+
+            Question lastDoneQuestionInQuizUnit;
+            if (doneQuestionsInQuizUnitForMember.Count() > 0)
+            {
+                lastDoneQuestionInQuizUnit = doneQuestionsInQuizUnitForMember
+                    .Include(p => p.Question)
+                    .OrderBy(p => p.Question.Order)
+                    .Select(p => p.Question)
+                    .Last();
+            }
+            else
+            {
+                lastDoneQuestionInQuizUnit = null;
+            }
+
+            QuizQuestionVM quizQuestionVM;
+            if (lastDoneQuestionInQuizUnit == null)
+            {
+                // Ta första frågan i QuizUnitet
+                var que = Question
+                    .Where(q => q.QuizUnitId == QuizUnitId)
+                    .OrderBy(q => q.Order)
+                    .Include(q => q.Answer)
+                    .First();
+
+                quizQuestionVM = new QuizQuestionVM
+                {
+                    QuestionText = que.QuestionText,
+                    Answers = que.Answer.ToArray(),
+                };
+            }
+            else
+            {
+                // Leta upp de frågorna som har högre order
+
+                var que = Question
+                    .Where(q => q.QuizUnitId == QuizUnitId)
+                    .Where(q => q.Order > lastDoneQuestionInQuizUnit.Order);
+
+                if (que.Count() == 0)
+                {
+                    // Det finns inte fler frågor i det här Quiz-unitet
+                    return null;
+                }
+                else
+                {
+                    var porque = que
+                        .OrderBy(q => q.Order)
+                        .First();
+
+                    quizQuestionVM = new QuizQuestionVM
+                    {
+                        QuestionText = porque.QuestionText,
+                        Answers = porque.Answer.ToArray(),
+                    };
+                }
+            }
+
+            return quizQuestionVM;
+        }
+
+        public int getCategoryIdByQuizUnitId(int quizUnitId)
+        {
+            return QuizUnit
+                .Include(q => q.Category)
+                .Single(q => q.QuizUnitId == quizUnitId)
+                .Category
+                .CategoryId;
+        }
+
         public QuizTextVM GetQuizTextVMById(int categoryId, string memberId)
         {
-            // todo - lägg till logik för att välja rätt quizunit, nu väljer den första som den hittar
             var nextQuizUnit = GetQuizUnit(categoryId, memberId);
-
-            //var qt = Category
-            //    .Include(o => o.QuizUnit)
-            //    .Where(c => c.CategoryId == categoryId)
-            //    .Select(c => new QuizTextVM
-            //    {
-            //        CategoryName = c.Title,
-            //        TextHeader = c.QuizUnit.First().InfoTextHeader,
-            //        TextContent = c.QuizUnit.First().InfoTextContent,
-            //    })
-            //    .FirstOrDefault();
 
             return new QuizTextVM
             {
                 CategoryName = nextQuizUnit.Category.Title,
                 TextContent = nextQuizUnit.InfoTextContent,
                 TextHeader = nextQuizUnit.InfoTextHeader,
+                QuizUnitId = nextQuizUnit.QuizUnitId,
             };
-
-            //return qt;
         }
 
         private QuizUnit GetQuizUnit(int categoryId, string memberId)
         {
-
             // Hämta alla frågor i kategorin som användaren har klarat av
             var doneQuestionsInCategory = Progress
                 .Where(p => p.MemberId == memberId)
@@ -177,10 +245,11 @@ namespace LearnMVC.Models.Entities
         private QuizUnit GetFirstQuestionInCategory(int categoryId)
         {
             return Category
-                                .Single(c => c.CategoryId == categoryId)
-                                .QuizUnit
-                                .OrderBy(q => q.Order)
-                                .First();
+                .Include(c => c.QuizUnit)
+                .Single(c => c.CategoryId == categoryId)
+                .QuizUnit
+                .OrderBy(q => q.Order)
+                .First();
         }
 
         public string GetCategoryTitleById(int id)

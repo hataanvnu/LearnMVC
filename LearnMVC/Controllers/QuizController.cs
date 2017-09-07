@@ -20,7 +20,7 @@ namespace LearnMVC.Controllers
         IdentityDbContext identityContext;
         QuizDbContext context;
 
-        public QuizController (
+        public QuizController(
             UserManager<IdentityUser> userManager,
             IdentityDbContext identityContext,
             QuizDbContext context)
@@ -35,18 +35,26 @@ namespace LearnMVC.Controllers
             return View();
         }
 
-        public IActionResult Text(int id)
+        public IActionResult Text(int id /*CategoryId*/)
         {
 
             QuizTextVM qt = context.GetQuizTextVMById(id, userManager.GetUserId(User));
-
             return View(qt);
         }
 
-        
-        public IActionResult Question(int id)
+
+        public IActionResult Question(int id /*QuizUnitId*/)
         {
-            return View();
+            QuizQuestionVM qqvm = context.GetNextQuestion(id, userManager.GetUserId(User));
+            if (qqvm != null)
+            {
+                return View(qqvm);
+            }
+            else
+            {
+                int categoryId = context.getCategoryIdByQuizUnitId(id);
+                return RedirectToAction(nameof(Text), new { id = categoryId });
+            }
         }
     }
 }

@@ -15,6 +15,43 @@ namespace LearnMVC.Models.Entities
         {
         }
 
+        /// <summary>
+        /// </summary>
+        /// <param name="id">The member ID of the current user</param>
+        /// <returns>The next question of the Quiz unit. If there are no more questions in this quiz unit, it returns NULL.</returns>
+        private Question GetNextQuestionByMemberId(string id)
+        {
+            // hämta användarens senaste Progress för att få fram QuestionId
+            var latestDate = Progress
+                .Where(p => p.MemberId == id)
+                .Max(p => p.DateCreated);
+
+            var latestQuestion = Progress
+                .Where(p => p.MemberId == id)
+                .SingleOrDefault(p => p.DateCreated.ToString() == latestDate.ToString())
+                .Question;
+
+            // hämta Det quiz-unitet
+            var latestQuizUnit = latestQuestion.QuizUnit;
+
+            // Ta fram nästa fråga i QuizUnitet
+            var currentQuestionOrder = latestQuestion.Order;
+            var que = Question
+                .Where(q => q.QuizUnit.QuizUnitId == latestQuizUnit.QuizUnitId)
+                .Where(q => q.Order > latestQuestion.Order)
+                .OrderBy(q => q.Order)
+                .FirstOrDefault();
+
+            // returnerar frågan om någon hittades, annars returneras null.
+            if (que != null)
+            {
+                return que;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         public MembersIndexVM GetMembersIndexVMById(string id, string userName)
         {

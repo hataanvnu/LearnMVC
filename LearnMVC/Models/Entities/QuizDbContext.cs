@@ -60,6 +60,10 @@ namespace LearnMVC.Models.Entities
 
                 entity.Property(e => e.ProgressId).HasColumnName("ProgressID");
 
+                entity.Property(e => e.DateCreated)
+                    .HasColumnType("datetime")
+                    .HasDefaultValueSql("(getdate())");
+
                 entity.Property(e => e.MemberId)
                     .HasColumnName("MemberID")
                     .HasMaxLength(450);
@@ -69,7 +73,7 @@ namespace LearnMVC.Models.Entities
                 entity.HasOne(d => d.Question)
                     .WithMany(p => p.Progress)
                     .HasForeignKey(d => d.QuestionId)
-                    .HasConstraintName("FK__Progress__Questi__17036CC0");
+                    .HasConstraintName("FK__Progress__Questi__1DB06A4F");
             });
 
             modelBuilder.Entity<Question>(entity =>

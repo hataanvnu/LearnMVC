@@ -8,6 +8,7 @@ namespace LearnMVC.Models.Entities
         public int ProgressId { get; set; }
         public string MemberId { get; set; }
         public int? QuestionId { get; set; }
+        public DateTime DateCreated { get; set; }
 
         public Question Question { get; set; }
     }

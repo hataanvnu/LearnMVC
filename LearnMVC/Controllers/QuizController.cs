@@ -21,8 +21,6 @@ namespace LearnMVC.Controllers
             this.context = context;
         }
 
-
-        // GET: /<controller>/
         public IActionResult Index()
         {
             return View();

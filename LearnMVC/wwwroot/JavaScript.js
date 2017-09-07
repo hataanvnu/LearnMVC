@@ -3,6 +3,10 @@ function DoStuff(id) {
     document.location.href = "/Quiz/Text/" + id;
 }
 
+function GoToIndex() {
+    document.location.href = "/Members/Index";
+}
+
 //$("#sidebarzItem, #sidebarzItemDone").click(function () {
 //    alert("yey!");
 //    var id = this.CategoryID;

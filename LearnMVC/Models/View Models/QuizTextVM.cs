@@ -13,6 +13,8 @@ namespace LearnMVC.Models.View_Models
 
         public string TextContent { get; set; }
 
+        public SidebarVM[] SidebarArray { get; set; }
+
         public int QuizUnitId { get; set; }
     }
 }

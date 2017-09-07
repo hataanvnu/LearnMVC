@@ -1,6 +1,5 @@
 ﻿@model MembersIndexVM
-<div style="padding-top:2%">
-    <img src="~/Images/LearnMVClogoWhite.png" width="170" style="float:left" />
+<div class="container-fluid">
     <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
         <h3>Välkommen @Model.UserName</h3>
         <br />
@@ -9,14 +8,13 @@
         {
             <div>
                 <br />
-                Progress:
+                <h3>Progress:</h3>
                 <br />
+                <p><b>Category:</b> @Model.CategoryName</p>
                 <br />
-                Category: @Model.CategoryName
+                <p><b>Quiz-Unit:</b> @Model.QuizUnitName</p>
                 <br />
-                Quiz-Unit: @Model.QuizUnitName
-                <br />
-                Question: @Model.QuestionText
+                <p><b>Question:</b> @Model.QuestionText</p>
                 <br />
 
 
@@ -30,7 +28,13 @@
             </div>
         }
     </div>
-    <div class="col-md-3">
+    <!--HERE IS SIDEBOX-->
+<div class="col-md-3" id="sidebox">
+    <div class="row" id="logobox" style="padding-top:10px">
+        <img src="~/Images/LearnMVClogo.png" width="170" style="float:left" />
+    </div>
+    <div>
         @Html.Partial("_Sidebar", Model.SidebarVMList)
     </div>
-</div> <!--END COLMD4-->
+</div>
+</div> <!--END ROW-->

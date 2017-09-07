@@ -37,8 +37,8 @@ namespace LearnMVC.Controllers
 
         public IActionResult Text(int id /*CategoryId*/)
         {
-
-            QuizTextVM qt = context.GetQuizTextVMById(id, userManager.GetUserId(User));
+            QuizTextVM qt = context.GetQuizTextVMById(id);
+            qt.SidebarArray = context.GetSidebarVMList(userManager.GetUserId(User));
             return View(qt);
         }
 

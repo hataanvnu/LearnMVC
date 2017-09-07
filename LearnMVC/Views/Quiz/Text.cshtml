@@ -1,8 +1,33 @@
 ﻿@model QuizTextVM
+<div class="container-fluid">
+    <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
+        <h3>@Model.CategoryName</h3>
 
-    <h1>@Model.CategoryName</h1>
+        <h4>@Model.TextHeader</h4>
+        <p>@Model.TextContent</p>
 
-<h2>@Model.TextHeader</h2>
-<p>@Model.TextContent</p>
+        <button onclick="Plus()">Next!</button>
 
-<a asp-controller="Quiz" asp-action="Question" asp-route-id="@Model.QuizUnitId">Nästa ></a>
+        @*<a asp-controller="Quiz" asp-action="Question">Nästa ></a>*@
+    </div>
+    <!--HERE IS SIDEBOX-->
+    <div class="col-md-3" id="sidebox">
+        <!--THIS IS LOGO-->
+        <div class="row" id="logobox" style="padding-top:10px">
+            <img src="~/Images/LearnMVClogo.png" width="170" style="float:left" />
+        </div>
+        <!--GO TO MY PROFIL-->
+        <div class="row" id="sidebarzItem" style="padding:5px; background-color:#ff28ce" onclick="GoToIndex()">
+            <img src="~/Images/super.png" width="30" style="float:left;margin-right:5px;margin-top:4px;" />
+            <h4>
+                My profile
+            </h4>
+        </div>
+        <!--HERE COMES ALL BARSPARTS-->
+        <div>
+            @Html.Partial("_Sidebar", Model.SidebarArray)
+        </div>
+    </div>
+</div>
+
+

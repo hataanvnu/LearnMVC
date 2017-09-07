@@ -12,9 +12,18 @@
     </div>
     <!--HERE IS SIDEBOX-->
     <div class="col-md-3" id="sidebox">
-        <div class="row" id="logobox">
+        <!--THIS IS LOGO-->
+        <div class="row" id="logobox" style="padding-top:10px">
             <img src="~/Images/LearnMVClogo.png" width="170" style="float:left" />
         </div>
+        <!--GO TO MY PROFIL-->
+        <div class="row" id="sidebarzItem" style="padding:5px; background-color:#ff28ce" onclick="GoToIndex()">
+            <img src="~/Images/super.png" width="30" style="float:left;margin-right:5px;margin-top:4px;" />
+            <h4>
+                My profile
+            </h4>
+        </div>
+        <!--HERE COMES ALL BARSPARTS-->
         <div>
             @Html.Partial("_Sidebar", Model.SidebarArray)
         </div>

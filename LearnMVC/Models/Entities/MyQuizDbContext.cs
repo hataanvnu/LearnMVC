@@ -99,31 +99,88 @@ namespace LearnMVC.Models.Entities
             var q = Category
                 .OrderBy(c => c.Order)
                 .Select(c => new SidebarVM
-            {
-                CategoryID = c.CategoryId,
-                CategoryName = c.Title,
-                IsDone = false, // todo - lägg till logik för detta.
-            }).ToArray();
+                {
+                    CategoryID = c.CategoryId,
+                    CategoryName = c.Title,
+                    IsDone = false, // todo - lägg till logik för detta.
+                }).ToArray();
 
             return q;
         }
 
-        public QuizTextVM GetQuizTextVMById(int id)
+        public QuizTextVM GetQuizTextVMById(int categoryId, string memberId)
         {
             // todo - lägg till logik för att välja rätt quizunit, nu väljer den första som den hittar
+            var nextQuizUnit = GetQuizUnit(categoryId, memberId);
 
-            var qt = Category
-                .Include(o => o.QuizUnit)
-                .Where(c => c.CategoryId == id)
-                .Select(c => new QuizTextVM
+            //var qt = Category
+            //    .Include(o => o.QuizUnit)
+            //    .Where(c => c.CategoryId == categoryId)
+            //    .Select(c => new QuizTextVM
+            //    {
+            //        CategoryName = c.Title,
+            //        TextHeader = c.QuizUnit.First().InfoTextHeader,
+            //        TextContent = c.QuizUnit.First().InfoTextContent,
+            //    })
+            //    .FirstOrDefault();
+
+            return new QuizTextVM
+            {
+                CategoryName = nextQuizUnit.Category.Title,
+                TextContent = nextQuizUnit.InfoTextContent,
+                TextHeader = nextQuizUnit.InfoTextHeader,
+            };
+
+            //return qt;
+        }
+
+        private QuizUnit GetQuizUnit(int categoryId, string memberId)
+        {
+
+            // Hämta alla frågor i kategorin som användaren har klarat av
+            var doneQuestionsInCategory = Progress
+                .Where(p => p.MemberId == memberId)
+                .Where(p => p.Question.QuizUnit.CategoryId == categoryId)
+                .Select(p => p.Question)
+                .Include(p => p.QuizUnit)
+                .ToArray();
+
+            if (doneQuestionsInCategory.Length == 0)
+            {
+                return GetFirstQuestionInCategory(categoryId);
+            }
+            else
+            {
+
+                // Hämta högsta ordern på ett avklarat quizunit i current category
+                int topDoneQuizUnitOrder = doneQuestionsInCategory
+                    .Max(q => q.QuizUnit.Order);
+
+                // Hämta alla quizunits med högre order.
+                var nextQuizUnits = doneQuestionsInCategory
+                    .Where(q => q.QuizUnit.Order > topDoneQuizUnitOrder);
+
+                if (nextQuizUnits.Count() > 0)
                 {
-                    CategoryName = c.Title,
-                    TextHeader = c.QuizUnit.First().InfoTextHeader,
-                    TextContent = c.QuizUnit.First().InfoTextContent,
-                })
-                .FirstOrDefault();
+                    var nextQuizUnit = nextQuizUnits
+                    .OrderBy(q => q.QuizUnit.Order)
+                    .First()
+                    .QuizUnit;
 
-            return qt;
+                    return nextQuizUnit;
+                }
+
+                return GetFirstQuestionInCategory(categoryId);
+            }
+        }
+
+        private QuizUnit GetFirstQuestionInCategory(int categoryId)
+        {
+            return Category
+                                .Single(c => c.CategoryId == categoryId)
+                                .QuizUnit
+                                .OrderBy(q => q.Order)
+                                .First();
         }
 
         public string GetCategoryTitleById(int id)

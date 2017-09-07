@@ -1,33 +1,36 @@
 ﻿@model MembersIndexVM
-<div class="container">
-    <h2>Välkommen @Model.UserName</h2>
-    <br />
-
-    @if (Model.HasPreviousProgress)
-    {
-    <div>
-        <br />
-        Progress:
-        <br />
-        <br />
-        Category: @Model.CategoryName
-        <br />
-        Quiz-Unit: @Model.QuizUnitName
-        <br />
-        Question: @Model.QuestionText
+<div style="padding-top:2%">
+    <img src="~/Images/LearnMVClogoWhite.png" width="170" style="float:left" />
+    <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
+        <h3>Välkommen @Model.UserName</h3>
         <br />
 
+        @if (Model.HasPreviousProgress)
+        {
+            <div>
+                <br />
+                Progress:
+                <br />
+                <br />
+                Category: @Model.CategoryName
+                <br />
+                Quiz-Unit: @Model.QuizUnitName
+                <br />
+                Question: @Model.QuestionText
+                <br />
 
-        <a asp-controller="Quiz" asp-action="Question" asp-route-id="@Model.QuestionID">Vill du fortsätta där du avslutade? Tryck här!</a>
+
+                <a asp-controller="Quiz" asp-action="Question" asp-route-id="@Model.QuestionID">Vill du fortsätta där du avslutade? Tryck här!</a>
+            </div>
+        }
+        else
+        {
+            <div>
+                Du verkar inte ha varit här förut. Tryck på en utav kategorierna till högeer för att dra igång!
+            </div>
+        }
     </div>
-    }
-    else
-    {
-    <div>
-        Du verkar inte ha varit här förut. Tryck på en utav kategorierna till högeer för att dra igång!
+    <div class="col-md-4" id="smallwhite">
+        @Html.Partial("_Sidebar", Model.SidebarVMList)
     </div>
-    }
-
-</div> <!--END CONTAINER-->
-@Html.Partial("_Sidebar", Model.SidebarVMList)
-
+</div> <!--END COLMD4-->

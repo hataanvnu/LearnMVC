@@ -1,7 +1,17 @@
 ﻿@model MembersLoginVM
 
 <div class="container" id="loginbox">
-    <h3>Log in</h3>
+    <!--HEADER HAPPENS HERE-->
+    <div class="row" id="logoandtext">
+        <div class="col-md-3" style="padding-top:2%">
+            <img src="~/Images/LearnMVCIcon.png" height="80" style="float:left;padding-left:1%; padding-right:2%" />
+        </div>
+        <div class="col-md-8">
+            <h3>Learn MVC!</h3>
+            <h4>Nice to see you again!</h4>
+        </div>
+    </div>
+    <!--FORM HAPPENS HERE-->
     <br />
 
     <form asp-controller="Members" asp-action="Login">
@@ -9,13 +19,15 @@
         <input asp-for="UserName" />
         <span asp-validation-for="UserName"></span>
         <br />
+        <br />
 
         <label asp-for="Password"></label>
         <input asp-for="Password" />
         <span asp-validation-for="Password"></span>
         <br />
+        <br />
 
-        <input type="submit" />
+        <button type="submit" class="btn btn-default">Go!</button>
     </form>
     <br />
     <a asp-controller="Members" asp-action="Register">Not a member yet? Join us now!</a>

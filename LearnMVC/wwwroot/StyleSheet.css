@@ -1,4 +1,4 @@
-﻿html {
+﻿html, .container-fluid {
     background: url(images/Background_lighter.png) no-repeat center center fixed;
     /*-webkit-background-size: cover;
     -moz-background-size: cover;
@@ -6,17 +6,41 @@
     background-size: cover;
 }
 
-#flowers {
-    background-color: pink;
+#logoandbox{
+    padding-left:20px;
+    padding-right:20px;
 }
+
+.btn btn-default {
+    background-color: #ff47d5;
+    color:whitesmoke;
+}
+
 #loginbox {
-    border: 5px solid green;
-    width: 400px;
+    /*border: 5px solid green;*/
+    border-radius: 10px;
+    width: 40%;
     margin: 0 auto;
     margin-top: 100px;
     padding: 20px;
-
+    background-color: whitesmoke;
+}
+#bigwhite , #smallwhite {
+    border-radius: 7px;
+    margin: 0 auto;
+    /*margin-top: 100px;*/
+    padding: 15px;
+    background-color: whitesmoke;
 }
 #question {
 
+}
+h1, h2 {
+    font-family:'Trajan Pro';
+}
+p, h3, label, h4, button, input {
+    font-family: 'Raleway', sans-serif;
+}
+h3, h2, h1 {
+    font-weight:bold;
 }

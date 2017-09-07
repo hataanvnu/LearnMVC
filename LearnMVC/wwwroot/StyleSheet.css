@@ -1,4 +1,12 @@
-﻿#flowers {
+﻿html {
+    background: url(images/Background_lighter.png) no-repeat center center fixed;
+    /*-webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;*/
+    background-size: cover;
+}
+
+#flowers {
     background-color: pink;
 }
 #loginbox {

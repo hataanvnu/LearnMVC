@@ -1,6 +1,5 @@
 ﻿@model MembersIndexVM
-<div style="padding-top:2%">
-    <img src="~/Images/LearnMVClogoWhite.png" width="170" style="float:left" />
+<div class="container-fluid">
     <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
         <h3>Välkommen @Model.UserName</h3>
         <br />
@@ -30,7 +29,13 @@
             </div>
         }
     </div>
-    <div class="col-md-3">
+    <!--HERE IS SIDEBOX-->
+<div class="col-md-3" id="sidebox">
+    <div class="row" id="logobox">
+        <img src="~/Images/LearnMVClogo.png" width="170" style="float:left" />
+    </div>
+    <div>
         @Html.Partial("_Sidebar", Model.SidebarVMList)
     </div>
-</div> <!--END COLMD4-->
+</div>
+</div> <!--END ROW-->

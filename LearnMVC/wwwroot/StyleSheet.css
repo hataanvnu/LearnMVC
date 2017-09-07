@@ -1,6 +1,6 @@
 ﻿/*The login page and all wrappers are here*/
 html, .container-fluid {
-    background: url(images/Gradients_Learn-Recovered.png) no-repeat center center fixed;
+    background: url(images/Background_lighter.png) no-repeat center center fixed;
     /*-webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;*/
@@ -34,29 +34,35 @@ h3, h2, h1 {
     max-width:400px;
 }
 /*Here are the index and question page stuffsiez*/
-#bigwhite , #smallwhite {
+#bigwhite {
     border-radius: 7px;
     margin: 0 auto;
     /*margin-top: 100px;*/
     padding: 15px;
     background-color: whitesmoke;
-}
+    height: 90vh;
+}   
 /*THE SIDEBAR*/
+#sidebox {
+    background-color: whitesmoke;
+    height:100vh;
+}
 #sidebarz {
-    color: white;
+    color: black;
     margin-top: 10px;
 }
 #sidebarzItem {
-    background-color: #bd7cf7;
+    background-color: #46b4ed;
 }
 #sidebarzItemDone {
     background-color: #ff76df;
 }
 #sidebarzItem, #sidebarzItemDone {
-    margin: 2px;
+    margin: 4px;
     padding: 3px;
     opacity: 0.8;
-    color: whitesmoke;
+    color: black;
     border-radius:5px;
+    /*border:3px solid white;*/
 }
 

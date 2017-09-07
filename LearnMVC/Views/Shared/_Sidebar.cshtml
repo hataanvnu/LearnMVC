@@ -4,7 +4,7 @@
     {
         if (category.IsDone)
         {
-            <div id="sidebarzItemDone">
+            <div id="sidebarzItemDone" onclick="DoStuff(@category.CategoryID)">
                 <span>KLAR!</span>
                 <!--NEJ TILL ATT HA FUL LINK HÄR. SKA VARA ONCLICK.-->
                 <a asp-controller="Quiz" asp-action="Text" asp-route-id="@category.CategoryID">@category.CategoryName</a>
@@ -14,7 +14,7 @@
             </div>
         }
 
-        <div id="sidebarzItem">
+        <div id="sidebarzItem" onclick="DoStuff(@category.CategoryID)">
 
             <a asp-controller="Quiz" asp-action="Text" asp-route-id="@category.CategoryID">@category.CategoryName</a>
             Namnet<br />

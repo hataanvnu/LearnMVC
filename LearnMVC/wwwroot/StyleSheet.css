@@ -11,7 +11,7 @@
     padding-right:20px;
 }
 
-.btn btn-default {
+button {
     background-color: #ff47d5;
     color:whitesmoke;
 }
@@ -24,6 +24,7 @@
     margin-top: 100px;
     padding: 20px;
     background-color: whitesmoke;
+    max-width:500px;
 }
 #bigwhite , #smallwhite {
     border-radius: 7px;

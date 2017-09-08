@@ -12,12 +12,21 @@
                 Completed
             </div>
         }
+        else
+        {
+            <div id="sidebarzItem" onclick="DoStuff(@category.CategoryID)">
+                <div class="row">
+                    <div class="col-md-6">
+                        @category.CategoryName <br />
+                        Extract <br />
+                        Completed
+                    </div>
+                    <div class="col-md-5">
+                        <img src="~/Images/Check.png" width="30" />
+                    </div>
+                </div>
 
-        <div id="sidebarzItem" onclick="DoStuff(@category.CategoryID)">
-
-            @category.CategoryName <br />
-            Extract <br />
-            Completed
-        </div>
+            </div>
+        }
     }
 </div>

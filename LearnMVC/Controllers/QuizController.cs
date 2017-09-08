@@ -62,7 +62,10 @@ namespace LearnMVC.Controllers
         {
             bool isCorrect = context.ChecksIfTheQuestionWasCorrectlyAnsweredAndInsertsThePossibleProgressToTheDatabase(answer, questionId, userManager.GetUserId(User));
 
-
+            if (!isCorrect)
+            {
+                TempData["WrongAnswer"] = "Wrong! Try Again!";
+            }
             //// Användaren har svarat rätt, lägg in det i databasen och skicka till nästa fråga
             //context.registerQuestionAsCorrect(quizQuestionVM.QuestionId, userManager.GetUserId(User));
 

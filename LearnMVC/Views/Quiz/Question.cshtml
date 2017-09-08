@@ -6,6 +6,11 @@
 
             <h3>@Model.QuestionText</h3>
 
+            @if (TempData["WrongAnswer"] != null)
+            {
+                <p>@TempData["WrongAnswer"]</p>
+            }
+
             @foreach (var answer in Model.Answers)
             {
                 <div class="radio" data-toggle="radio">

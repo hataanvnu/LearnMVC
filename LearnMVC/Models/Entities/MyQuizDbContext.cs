@@ -271,7 +271,7 @@ namespace LearnMVC.Models.Entities
                 .Title;
         }
 
-        internal void registerQuestionAsCorrect(int questionId, string memberId)
+        internal void RegisterQuestionAsCorrect(int questionId, string memberId)
         {
             Progress.Add(new Progress
             {
@@ -293,7 +293,7 @@ namespace LearnMVC.Models.Entities
 
             if (answer.IsCorrect)
             {
-                registerQuestionAsCorrect(questionId, memberId);
+                RegisterQuestionAsCorrect(questionId, memberId);
                 return true;
             }
             else

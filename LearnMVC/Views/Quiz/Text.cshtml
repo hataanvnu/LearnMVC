@@ -6,7 +6,9 @@
         <h4>@Model.TextHeader</h4>
         <p>@Model.TextContent</p>
 
-        <button onclick="Plus()">Next!</button>
+        
+ 
+        <button onclick="Plus(@Model.QuizUnitId)">Next!</button>
 
         @*<a asp-controller="Quiz" asp-action="Question">Nästa ></a>*@
     </div>

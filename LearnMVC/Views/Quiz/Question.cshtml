@@ -1,9 +1,30 @@
-﻿<div class="container" id="question">
+﻿@model QuizQuestionVM
+<div class="container-fluid">
+    <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
 
-    <h3>Question name here</h3>
+        <div class="form-group">
 
-    @*@foreach (var answer in question)
-    {
-        <p>@answer.text?</p>
-    }*@
-</div>
+            <h3>@Model.QuestionText</h3>
+
+            @foreach (var answer in Model.Answers)
+            {
+                <div class="radio" data-toggle="radio">
+                    <label><input type="radio" name="optradio" value="@answer.AnswerText" />@answer.AnswerText</label>
+                </div>
+            }
+            <input type="submit" value="Go!" onclick="SubmitAnswer()"/>
+            <p><input type="button" value="Get Value"></p>
+            
+
+        </div>
+    </div>
+    <!--HERE IS SIDEBOX-->
+    <div class="col-md-3" id="sidebox">
+        <div class="row" id="logobox" style="padding-top:10px">
+            <img src="~/Images/LearnMVClogo.png" width="170" style="float:left" />
+        </div>
+        <div>
+            @*@Html.Partial("_Sidebar", Model.SidebarVMList)*@
+        </div>
+    </div>
+</div> <!--END ROW-->

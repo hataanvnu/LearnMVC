@@ -7,6 +7,26 @@ function GoToIndex() {
     document.location.href = "/Members/Index";
 }
 
+
+function Plus(id) {
+    document.location.href = "/Quiz/Question/" + id;
+}
+
+function SubmitAnswer(id) {
+    document.location.href = "/Quiz/Question/" + id;
+}
+
+
+$(document).ready(function () {
+    $("input[type='button']").click(function () {
+        var radioValue = $("input[name='optradio']:checked").val();
+        if (radioValue) {
+            alert(radioValue);
+        }
+    });
+
+});
+
 //$("#sidebarzItem, #sidebarzItemDone").click(function () {
 //    alert("yey!");
 //    var id = this.CategoryID;

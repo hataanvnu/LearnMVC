@@ -123,7 +123,7 @@ namespace LearnMVC.Models.Entities
 
             var numberOfDoneQuestionsForUser = Progress
                 .Include(p => p.Question)
-                .Include(p => p.Question.QuizUnit)
+                .Where(p => p.MemberId == memberID)
                 .Where(p => p.Question.QuizUnit.CategoryId == categoryId)
                 .Count();
 

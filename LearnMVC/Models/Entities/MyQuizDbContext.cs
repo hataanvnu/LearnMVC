@@ -94,16 +94,42 @@ namespace LearnMVC.Models.Entities
 
         internal SidebarVM[] GetSidebarVMList(string memberID)
         {
-            var q = Category
-                .OrderBy(c => c.Order)
-                .Select(c => new SidebarVM
-                {
-                    CategoryID = c.CategoryId,
-                    CategoryName = c.Title,
-                    IsDone = false, // todo - lägg till logik för detta.
-                }).ToArray();
 
-            return q;
+            var SortedCategories = Category
+                .OrderBy(c => c.Order)
+                .ToArray();
+
+            List<SidebarVM> sidebarList = new List<SidebarVM>();
+
+            foreach (var category in SortedCategories)
+            {
+                sidebarList.Add(new SidebarVM
+                {
+                    CategoryID = category.CategoryId,
+                    CategoryName = category.Title,
+                    IsDone = CategoryIsDone(memberID, category.CategoryId),
+                });
+            }
+
+            return sidebarList.ToArray();
+        }
+
+        private bool CategoryIsDone(string memberID, int categoryId)
+        {
+            var numberOfQuestionsInCategory = Question
+                .Include(q => q.QuizUnit)
+                .Where(q => q.QuizUnit.CategoryId == categoryId)
+                .Count();
+
+            var numberOfDoneQuestionsForUser = Progress
+                .Include(p => p.Question)
+                .Include(p => p.Question.QuizUnit)
+                .Where(p => p.Question.QuizUnit.CategoryId == categoryId)
+                .Count();
+
+            return numberOfDoneQuestionsForUser == numberOfQuestionsInCategory;
+
+
         }
 
         /// <summary>
@@ -138,7 +164,7 @@ namespace LearnMVC.Models.Entities
             if (lastDoneQuestionInQuizUnit == null)
             {
                 // Ta första frågan i QuizUnitet
-                var que = Question
+                var firstQuestionOfCurrentQuizUnit = Question
                     .Where(q => q.QuizUnitId == QuizUnitId)
                     .OrderBy(q => q.Order)
                     .Include(q => q.Answer)
@@ -146,9 +172,9 @@ namespace LearnMVC.Models.Entities
 
                 quizQuestionVM = new QuizQuestionVM
                 {
-                    QuestionText = que.QuestionText,
-                    Answers = que.Answer.ToArray(),
-                    QuestionId = que.QuestionId,
+                    QuestionText = firstQuestionOfCurrentQuizUnit.QuestionText,
+                    Answers = firstQuestionOfCurrentQuizUnit.Answer.ToArray(),
+                    QuestionId = firstQuestionOfCurrentQuizUnit.QuestionId,
                 };
             }
             else
@@ -236,15 +262,15 @@ namespace LearnMVC.Models.Entities
                     .Max(q => q.QuizUnit.Order);
 
                 // Hämta alla quizunits med högre order.
-                var nextQuizUnits = doneQuestionsInCategory
-                    .Where(q => q.QuizUnit.Order > topDoneQuizUnitOrder);
+                var nextQuizUnits = QuizUnit
+                    .Where(q => q.Order > topDoneQuizUnitOrder);
 
                 if (nextQuizUnits.Count() > 0)
                 {
                     var nextQuizUnit = nextQuizUnits
-                    .OrderBy(q => q.QuizUnit.Order)
-                    .First()
-                    .QuizUnit;
+                    .OrderBy(q => q.Order)
+                    .Include(q => q.Category)
+                    .First();
 
                     return nextQuizUnit;
                 }

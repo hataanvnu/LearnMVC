@@ -2,21 +2,21 @@
 <div class="container-fluid">
     <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
 
-        <div class="form-group">
+        <form asp-controller="Quiz" asp-action="Question">
 
             <h3>@Model.QuestionText</h3>
 
             @foreach (var answer in Model.Answers)
             {
                 <div class="radio" data-toggle="radio">
-                    <label><input type="radio" name="optradio" value="@answer.AnswerText" />@answer.AnswerText</label>
+                    <label><input type="radio" name="answer" value="@answer.AnswerId" />@answer.AnswerText</label>
                 </div>
             }
-            <input type="submit" value="Go!" onclick="SubmitAnswer()"/>
-            <p><input type="button" value="Get Value"></p>
-            
 
-        </div>
+            <input type="submit" value="Next" />
+
+        </form>
+
     </div>
     <!--HERE IS SIDEBOX-->
     <div class="col-md-3" id="sidebox">

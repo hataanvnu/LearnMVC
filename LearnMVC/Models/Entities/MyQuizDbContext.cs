@@ -128,6 +128,7 @@ namespace LearnMVC.Models.Entities
                     .Include(p => p.Question)
                     .OrderBy(p => p.Question.Order)
                     .Select(p => p.Question)
+                    .Include(q => q.Answer)
                     .Last();
             }
             else
@@ -149,6 +150,7 @@ namespace LearnMVC.Models.Entities
                 {
                     QuestionText = que.QuestionText,
                     Answers = que.Answer.ToArray(),
+                    QuestionId = que.QuestionId,
                 };
             }
             else
@@ -174,6 +176,7 @@ namespace LearnMVC.Models.Entities
                     {
                         QuestionText = porque.QuestionText,
                         Answers = porque.Answer.ToArray(),
+                        QuestionId = porque.QuestionId,
                     };
                 }
             }
@@ -181,13 +184,22 @@ namespace LearnMVC.Models.Entities
             return quizQuestionVM;
         }
 
-        public int getCategoryIdByQuizUnitId(int quizUnitId)
+        public int GetCategoryIdByQuizUnitId(int quizUnitId)
         {
             return QuizUnit
                 .Include(q => q.Category)
                 .Single(q => q.QuizUnitId == quizUnitId)
                 .Category
                 .CategoryId;
+        }
+
+        public int GetQuizUnitIdByQuestionId(int questionId)
+        {
+            return Question
+                .Include(q => q.QuizUnit)
+                .Single(q => q.QuestionId == questionId)
+                .QuizUnit
+                .QuizUnitId;
         }
 
         public QuizTextVM GetQuizTextVMById(int categoryId, string memberId)
@@ -215,7 +227,7 @@ namespace LearnMVC.Models.Entities
 
             if (doneQuestionsInCategory.Length == 0)
             {
-                return GetFirstQuestionInCategory(categoryId);
+                return GetFirstQuizUnitInCategory(categoryId);
             }
             else
             {
@@ -238,11 +250,11 @@ namespace LearnMVC.Models.Entities
                     return nextQuizUnit;
                 }
 
-                return GetFirstQuestionInCategory(categoryId);
+                return GetFirstQuizUnitInCategory(categoryId);
             }
         }
 
-        private QuizUnit GetFirstQuestionInCategory(int categoryId)
+        private QuizUnit GetFirstQuizUnitInCategory(int categoryId)
         {
             return Category
                 .Include(c => c.QuizUnit)
@@ -252,11 +264,42 @@ namespace LearnMVC.Models.Entities
                 .First();
         }
 
-        public string GetCategoryTitleById(int id)
+        public string GetCategoryTitleById(int categoryId)
         {
             return Category
-                .SingleOrDefault(c => c.CategoryId == id)
+                .SingleOrDefault(c => c.CategoryId == categoryId)
                 .Title;
+        }
+
+        internal void registerQuestionAsCorrect(int questionId, string memberId)
+        {
+            Progress.Add(new Progress
+            {
+                MemberId = memberId,
+                QuestionId = questionId,
+            });
+
+            SaveChanges();
+        }
+
+        public bool ChecksIfTheQuestionWasCorrectlyAnsweredAndInsertsThePossibleProgressToTheDatabase(int answerId, int questionId, string memberId)
+        {
+            var question = Question
+                .Include(q => q.Answer)
+                .Single(q => q.QuestionId == questionId);
+
+            var answer = question.Answer
+                .Single(a => a.AnswerId == answerId);
+
+            if (answer.IsCorrect)
+            {
+                registerQuestionAsCorrect(questionId, memberId);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }

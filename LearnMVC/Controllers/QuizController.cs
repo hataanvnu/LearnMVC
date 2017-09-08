@@ -42,7 +42,7 @@ namespace LearnMVC.Controllers
             return View(qt);
         }
 
-
+        [HttpGet]
         public IActionResult Question(int id /*QuizUnitId*/)
         {
             QuizQuestionVM qqvm = context.GetNextQuestion(id, userManager.GetUserId(User));
@@ -52,9 +52,22 @@ namespace LearnMVC.Controllers
             }
             else
             {
-                int categoryId = context.getCategoryIdByQuizUnitId(id);
+                int categoryId = context.GetCategoryIdByQuizUnitId(id);
                 return RedirectToAction(nameof(Text), new { id = categoryId });
             }
+        }
+
+        [HttpPost]
+        public IActionResult Question(int answer, int questionId)
+        {
+            bool isCorrect = context.ChecksIfTheQuestionWasCorrectlyAnsweredAndInsertsThePossibleProgressToTheDatabase(answer, questionId, userManager.GetUserId(User));
+
+
+            //// Användaren har svarat rätt, lägg in det i databasen och skicka till nästa fråga
+            //context.registerQuestionAsCorrect(quizQuestionVM.QuestionId, userManager.GetUserId(User));
+
+            return RedirectToAction(nameof(Question), new { id = context.GetQuizUnitIdByQuestionId(questionId) });
+            //return null;
         }
     }
 }

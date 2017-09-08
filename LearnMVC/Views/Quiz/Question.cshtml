@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
 
-        <form asp-controller="Quiz" asp-action="Question">
+        <form asp-controller="Quiz" asp-action="Question" asp-route-questionId="@Model.QuestionId">
 
             <h3>@Model.QuestionText</h3>
 

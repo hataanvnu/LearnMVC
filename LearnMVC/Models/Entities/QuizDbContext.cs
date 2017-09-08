@@ -107,6 +107,5 @@ namespace LearnMVC.Models.Entities
             });
         }
 
-
     }
 }

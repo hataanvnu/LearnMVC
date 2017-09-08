@@ -11,5 +11,7 @@ namespace LearnMVC.Models.View_Models
         public string QuestionText { get; set; }
 
         public Answer[] Answers { get; set; }
+
+        public int QuestionId { get; set; }
     }
 }

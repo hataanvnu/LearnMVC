@@ -9,8 +9,6 @@ namespace LearnMVC.Models.Entities
 {
     public partial class QuizDbContext : DbContext
     {
-
-
         public QuizDbContext(DbContextOptions<QuizDbContext> options) : base(options)
         {
         }
@@ -157,18 +155,19 @@ namespace LearnMVC.Models.Entities
             {
                 // Leta upp de frågorna som har högre order
 
-                var que = Question
+                var QuestionsOfHigherOrder = Question
                     .Where(q => q.QuizUnitId == QuizUnitId)
-                    .Where(q => q.Order > lastDoneQuestionInQuizUnit.Order);
+                    .Where(q => q.Order > lastDoneQuestionInQuizUnit.Order)
+                    .Include(q => q.Answer);
 
-                if (que.Count() == 0)
+                if (QuestionsOfHigherOrder.Count() == 0)
                 {
                     // Det finns inte fler frågor i det här Quiz-unitet
                     return null;
                 }
                 else
                 {
-                    var porque = que
+                    var porque = QuestionsOfHigherOrder
                         .OrderBy(q => q.Order)
                         .First();
 

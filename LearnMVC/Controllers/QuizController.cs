@@ -46,6 +46,7 @@ namespace LearnMVC.Controllers
         public IActionResult Question(int id /*QuizUnitId*/)
         {
             QuizQuestionVM qqvm = context.GetNextQuestion(id, userManager.GetUserId(User));
+            qqvm.SidebarArray = context.GetSidebarVMList(userManager.GetUserId(User));
             if (qqvm != null)
             {
                 return View(qqvm);

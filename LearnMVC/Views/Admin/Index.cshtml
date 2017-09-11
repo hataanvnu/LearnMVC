@@ -1,4 +1,18 @@
 ﻿
-<h1 style="font-size: 100px; padding-top: 300px;">Hej Magda, style'a på!</h1>
-
+<div class="container-fluid">
+    <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
+        <h3>Välkommen Admin!</h3>
 <a asp-controller="Admin" asp-action="AddCategory" style="color:black;">Varsegod! Här får du en ful länk också. (Den går till AddCategory...)</a>
+        <br />
+        UNICORNS!
+    </div>
+    <!--HERE IS SIDEBOX-->
+    <div class="col-md-3" id="sidebox">
+        <div class="row" id="logobox" style="padding-top:10px">
+            <img src="~/Images/LearnMVClogo.png" width="170" style="float:left" />
+        </div>
+        <div>
+            @*@Html.Partial("_Sidebar", Model.SidebarVMList)*@
+        </div>
+    </div>
+</div> <!--END ROW-->

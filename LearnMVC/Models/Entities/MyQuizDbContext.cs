@@ -353,21 +353,24 @@ namespace LearnMVC.Models.Entities
                 InfoTextHeader = model.QuizUnitHeader,
                 InfoTextContent = model.QuizUnitContent,
                 CategoryId = model.SelectedCategoryId,
+                QuizUnitId = QuizUnit.Max(q => q.QuizUnitId) + 1,
             });
             SaveChanges();
         }
 
         public AddQuizUnitVM GetNewQuizUnitVM()
         {
-            AddQuizUnitVM model = new AddQuizUnitVM
+            AddQuizUnitVM model = new AddQuizUnitVM();
+
+            model.Categories = Category.Select(c => new SelectListItem
             {
-                Categories = Category.Select(c => new SelectListItem
-                {
-                    Text = c.Title,
-                    Value = c.CategoryId.ToString(),
-                })
-                .ToArray(),
-            };
+                Text = c.Title,
+                Value = c.CategoryId.ToString(),
+            })
+            .ToArray();
+
+            model.SelectedCategoryId = Convert.ToInt32(model.Categories[0].Value);
+
             return model;
         }
     }

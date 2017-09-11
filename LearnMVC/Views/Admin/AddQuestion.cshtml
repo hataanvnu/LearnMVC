@@ -1,11 +1,20 @@
-﻿@model MembersIndexVM
-
+﻿@model AddQuestionVM
 <div class="container-fluid">
     <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
-        <h3>Välkommen Admin!</h3>
-<a asp-controller="Admin" asp-action="AddCategory" style="color:black;">Varsegod! Här får du en ful länk också. (Den går till AddCategory...)</a>
+        <h3>Gör ett nytt quiz, Admin!</h3>
         <br />
         UNICORNS!
+        <h2>Add Quiz Unit</h2>
+        <form asp-controller="Admin" asp-action="AddQuizUnit">
+            <label asp-for="@Model.QuestionText"></label>
+            <input asp-for="@Model.QuestionText" />
+            <span asp-validation-for="@Model.QuestionText"></span>
+            <br />
+            <br />
+
+            <button type="submit">Summon Unicorns!</button>
+        </form>
+
     </div>
     <!--HERE IS SIDEBOX-->
     <div class="col-md-3" id="sidebox">

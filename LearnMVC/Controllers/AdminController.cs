@@ -77,5 +77,25 @@ namespace LearnMVC.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        [HttpGet]
+        public IActionResult AddQuestion()
+        {
+            AddQuestionVM addQuestionVM = context.GetNewQuestionVM();
+            return View(addQuestionVM);
+        }
+
+        [HttpPost]
+        public IActionResult AddQuestion(AddQuestionVM model, int correctAnswer)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            context.AddNewQuestion(model, correctAnswer);
+
+            return RedirectToAction(nameof(Index));
+        }
     }
 }

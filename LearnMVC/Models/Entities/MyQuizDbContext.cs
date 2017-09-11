@@ -374,15 +374,26 @@ namespace LearnMVC.Models.Entities
         }
 
 
-        internal void AddNewQuestion(AddQuestionVM model)
+        internal void AddNewQuestion(AddQuestionVM model, int correctAnswer)
         {
             // Todo - fixa så att order kollas och ändras
-            Question.Add(new Question
+            Question q = new Question
             {
                 QuestionText = model.QuestionText,
                 Order = Question.Max(c => c.Order) + 1,
                 QuizUnitId = model.SelectedQuizUnitId,
-            });
+            };
+            Question.Add(q);
+
+            for (int i = 0; i < model.Answers.Length; i++)
+            {
+                Answer.Add(new Answer
+                {
+                    AnswerText = model.Answers[i],
+                    IsCorrect = i == correctAnswer,
+                    Question = q,
+                });
+            }
             SaveChanges();
         }
 
@@ -398,6 +409,8 @@ namespace LearnMVC.Models.Entities
             .ToArray();
 
             model.SelectedQuizUnitId = Convert.ToInt32(model.PossibleQuizUnits[0].Value);
+
+            model.Answers = new string[4];
 
             return model;
         }

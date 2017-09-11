@@ -11,6 +11,22 @@
             <span asp-validation-for="@Model.QuestionText"></span>
             <br />
             <br />
+            <label asp-for="@Model.SelectedQuizUnitId"></label>
+            <select asp-for="@Model.SelectedQuizUnitId" asp-items="@Model.PossibleQuizUnits"></select>
+            <span asp-validation-for="SelectedQuizUnitId"></span>
+            <br />
+            <br />
+
+            @for (int i = 0; i < Model.Answers.Length; i++)
+            {
+                <div class="radio" data-toggle="radio">
+                    <label asp-for="@Model.Answers"><input type="radio" name="correctAnswer" value="@i" /></label>
+                    <input asp-for="@Model.Answers" />
+                    <span asp-validation-for="@Model.Answers"></span>
+                </div>
+                <br />
+                <br />
+            }
 
             <button type="submit">Summon Unicorns!</button>
         </form>

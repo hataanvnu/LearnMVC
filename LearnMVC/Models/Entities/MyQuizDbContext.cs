@@ -338,7 +338,7 @@ namespace LearnMVC.Models.Entities
             // Todo - fixa så att order kollas och ändras
             Category.Add(new Category
             {
-                Order = model.Order,
+                Order = Category.Max(c => c.Order) + 1,
                 Title = model.CategoryTitle,
             });
             SaveChanges();
@@ -349,11 +349,10 @@ namespace LearnMVC.Models.Entities
             // Todo - fixa så att order kollas och ändras
             QuizUnit.Add(new QuizUnit
             {
-                Order = model.Order,
+                Order = QuizUnit.Max(c => c.Order) + 1,
                 InfoTextHeader = model.QuizUnitHeader,
                 InfoTextContent = model.QuizUnitContent,
                 CategoryId = model.SelectedCategoryId,
-                QuizUnitId = QuizUnit.Max(q => q.QuizUnitId) + 1,
             });
             SaveChanges();
         }

@@ -16,20 +16,17 @@
             <span asp-validation-for="SelectedQuizUnitId"></span>
             <br />
             <br />
-            <div class="radio" data-toggle="radio">
-                <label asp-for="@Model.Answer1"><input type="radio" name="correctAnswer" value="1" /></label>
-                <input asp-for="@Model.Answer1" />
-                <span asp-validation-for="@Model.Answer1"></span>
-            </div>
-            <br />
-            <br />
-            <div class="radio" data-toggle="radio">
-                <label asp-for="@Model.Answer2"><input type="radio" name="correctAnswer" value="2" /></label>
-                <input asp-for="@Model.Answer2" />
-                <span asp-validation-for="@Model.Answer2"></span>
-            </div>
-            <br />
-            <br />
+
+            @for (int i = 0; i < Model.Answers.Length; i++)
+            {
+                <div class="radio" data-toggle="radio">
+                    <label asp-for="@Model.Answers"><input type="radio" name="correctAnswer" value="@i" /></label>
+                    <input asp-for="@Model.Answers" />
+                    <span asp-validation-for="@Model.Answers"></span>
+                </div>
+                <br />
+                <br />
+            }
 
             <button type="submit">Summon Unicorns!</button>
         </form>

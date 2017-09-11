@@ -385,18 +385,15 @@ namespace LearnMVC.Models.Entities
             };
             Question.Add(q);
 
-            Answer.Add(new Answer
+            for (int i = 0; i < model.Answers.Length; i++)
             {
-                AnswerText = model.Answer1,
-                IsCorrect = correctAnswer == 1,
-                Question = q,
-            });
-            Answer.Add(new Answer
-            {
-                AnswerText = model.Answer2,
-                IsCorrect = correctAnswer == 2,
-                Question = q,
-            });
+                Answer.Add(new Answer
+                {
+                    AnswerText = model.Answers[i],
+                    IsCorrect = i == correctAnswer,
+                    Question = q,
+                });
+            }
             SaveChanges();
         }
 
@@ -412,6 +409,8 @@ namespace LearnMVC.Models.Entities
             .ToArray();
 
             model.SelectedQuizUnitId = Convert.ToInt32(model.PossibleQuizUnits[0].Value);
+
+            model.Answers = new string[4];
 
             return model;
         }

@@ -21,8 +21,6 @@ namespace LearnMVC.Models.View_Models
         [Display(Name = "Quit unit")]
         public int SelectedQuizUnitId { get; set; }
 
-        public string Answer1 { get; set; }
-
-        public string Answer2 { get; set; }
+        public string[] Answers { get; set; }
     }
 }

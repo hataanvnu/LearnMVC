@@ -331,5 +331,16 @@ namespace LearnMVC.Models.Entities
         {
             return (bool)Member.Single(m => m.MemberId == v).IsAdmin;
         }
+
+        public void AddNewCategory(AddCategoryVM model)
+        {
+            // Todo - fixa så att order kollas och ändras
+            Category.Add(new Entities.Category
+            {
+                Order = model.Order,
+                Title = model.CategoryTitle,
+            });
+            SaveChanges();
+        }
     }
 }

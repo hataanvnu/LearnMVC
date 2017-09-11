@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,7 +15,5 @@ namespace LearnMVC.Models.View_Models
         public string CategoryTitle { get; set; }
 
         public int Order { get; set; }
-
-        public List<QuizUnitSubVM> QuizUnits { get; set; }
     }
 }

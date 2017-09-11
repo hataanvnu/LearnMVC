@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace LearnMVC.Models.View_Models
 {
-    public class AnswerSubVM
+    public class AddAnswerVM
     {
         public string AnswerText { get; set; }
 

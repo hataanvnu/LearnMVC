@@ -5,13 +5,11 @@ using System.Threading.Tasks;
 
 namespace LearnMVC.Models.View_Models
 {
-    public class QuizUnitSubVM
+    public class AddQuizUnitVM
     {
         public string QuizUnitHeader { get; set; }
 
         public string QuizUnitContent { get; set; }
-
-        public List<QuestionSubVM> Questions { get; set; }
 
         public int Order { get; set; }
 

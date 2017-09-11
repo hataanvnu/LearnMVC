@@ -43,10 +43,17 @@ namespace LearnMVC.Controllers
         }
 
         [HttpPost]
-        public string AddCategory(AddCategoryVM model)
+        public IActionResult AddCategory(AddCategoryVM model)
         {
             context.AddNewCategory(model);
-            return "Det gick.";
+            return RedirectToAction(nameof(Index));
+        }
+
+        [HttpGet]
+        public IActionResult AddQuizUnit()
+        {
+            AddQuizUnitVM addQuizUnitVM = new AddQuizUnitVM();
+            return View(addQuizUnitVM);
         }
     }
 }

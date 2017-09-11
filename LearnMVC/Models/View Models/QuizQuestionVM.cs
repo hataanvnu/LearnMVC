@@ -13,5 +13,6 @@ namespace LearnMVC.Models.View_Models
         public Answer[] Answers { get; set; }
 
         public int QuestionId { get; set; }
+
     }
 }

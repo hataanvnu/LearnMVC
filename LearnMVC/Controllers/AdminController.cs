@@ -86,14 +86,14 @@ namespace LearnMVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddQuestion(AddQuestionVM model)
+        public IActionResult AddQuestion(AddQuestionVM model, int correctAnswer)
         {
             if (!ModelState.IsValid)
             {
                 return View(model);
             }
 
-            context.AddNewQuestion(model);
+            context.AddNewQuestion(model, correctAnswer);
 
             return RedirectToAction(nameof(Index));
         }

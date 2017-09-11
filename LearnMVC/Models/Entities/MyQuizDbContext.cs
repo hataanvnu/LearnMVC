@@ -372,5 +372,35 @@ namespace LearnMVC.Models.Entities
 
             return model;
         }
+
+
+        internal void AddNewQuestion(AddQuestionVM model)
+        {
+            // Todo - fixa så att order kollas och ändras
+            Question.Add(new Question
+            {
+                QuestionText = model.QuestionText,
+                Order = Question.Max(c => c.Order) + 1,
+                QuizUnitId = model.SelectedQuizUnitId,
+            });
+            SaveChanges();
+        }
+
+        public AddQuestionVM GetNewQuestionVM()
+        {
+            AddQuestionVM model = new AddQuestionVM();
+
+            model.PossibleQuizUnits = QuizUnit.Select(c => new SelectListItem
+            {
+                Text = c.InfoTextHeader,
+                Value = c.QuizUnitId.ToString(),
+            })
+            .ToArray();
+
+            model.SelectedQuizUnitId = Convert.ToInt32(model.PossibleQuizUnits[0].Value);
+
+            return model;
+        }
+
     }
 }

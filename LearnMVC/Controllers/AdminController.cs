@@ -33,7 +33,10 @@ namespace LearnMVC.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            return View();
+            string memberID = userManager.GetUserId(User);
+            var membersIndexVM = context.GetMembersIndexVMById(memberID, User.Identity.Name);
+            membersIndexVM.SidebarVMList = context.GetSidebarVMList(memberID);
+            return View(membersIndexVM);
         }
         
         [HttpGet]

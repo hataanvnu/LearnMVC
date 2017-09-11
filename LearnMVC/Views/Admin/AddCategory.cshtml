@@ -1,5 +1,11 @@
 ﻿@model AddCategoryVM
 
+
+<div class="container-fluid">
+    <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
+        <h3>Gör ett nytt quiz, Admin!</h3>
+        <br />
+        UNICORNS!
     <form asp-controller="Admin" asp-action="AddCategory">
         <label asp-for="@Model.CategoryTitle"></label>
         <input asp-for="@Model.CategoryTitle" />
@@ -9,3 +15,14 @@
 
         <button type="submit">Summon Unicorns!</button>
     </form>
+    </div>
+    <!--HERE IS SIDEBOX-->
+    <div class="col-md-3" id="sidebox">
+        <div class="row" id="logobox" style="padding-top:10px">
+            <img src="~/Images/LearnMVClogo.png" width="170" style="float:left" />
+        </div>
+        <div>
+            @*@Html.Partial("_Sidebar", Model.SidebarVMList)*@
+        </div>
+    </div>
+</div> <!--END ROW-->

@@ -11,6 +11,9 @@
             <span asp-validation-for="@Model.QuestionText"></span>
             <br />
             <br />
+            <label asp-for="@Model.SelectedQuizUnitId"></label>
+            <select asp-for="@Model.SelectedQuizUnitId" asp-items="@Model.PossibleQuizUnits"></select>
+            <span asp-validation-for="SelectedQuizUnitId"></span>
 
             <button type="submit">Summon Unicorns!</button>
         </form>

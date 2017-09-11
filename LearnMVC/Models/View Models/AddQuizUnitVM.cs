@@ -21,6 +21,8 @@ namespace LearnMVC.Models.View_Models
 
         public SelectListItem[] Categories { get; set; }
 
+        [Required]
+        [Display(Name = "Category")]
         public int SelectedCategoryId { get; set; }
     }
 }

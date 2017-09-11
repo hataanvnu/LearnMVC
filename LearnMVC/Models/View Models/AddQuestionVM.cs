@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,5 +12,8 @@ namespace LearnMVC.Models.View_Models
 
         public int Order { get; set; }
 
+        public SelectListItem[] PossibleQuizUnits { get; set; }
+
+        public int SelectedQuizUnitId { get; set; }
     }
 }

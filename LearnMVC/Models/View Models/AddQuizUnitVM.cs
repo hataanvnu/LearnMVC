@@ -19,10 +19,8 @@ namespace LearnMVC.Models.View_Models
 
         public int Order { get; set; }
 
-        public SelectListItem[] Categories { get; set; } =
-        {
-            new SelectListItem {Text = "En kategori", Value = "Ett value"},
-            new SelectListItem {Text = "En till kategori", Value = "Ett till value"},
-        };
+        public SelectListItem[] Categories { get; set; }
+
+        public int SelectedCategoryId { get; set; }
     }
 }

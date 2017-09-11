@@ -45,15 +45,34 @@ namespace LearnMVC.Controllers
         [HttpPost]
         public IActionResult AddCategory(AddCategoryVM model)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
             context.AddNewCategory(model);
+
             return RedirectToAction(nameof(Index));
         }
 
         [HttpGet]
         public IActionResult AddQuizUnit()
         {
-            AddQuizUnitVM addQuizUnitVM = new AddQuizUnitVM();
+            AddQuizUnitVM addQuizUnitVM = context.GetNewQuizUnitVM();
             return View(addQuizUnitVM);
+        }
+
+        [HttpPost]
+        public IActionResult AddQuizUnit(AddQuizUnitVM model)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            context.AddNewQuizUnit(model);
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

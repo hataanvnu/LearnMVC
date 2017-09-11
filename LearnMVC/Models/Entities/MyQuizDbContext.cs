@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using LearnMVC.Models.View_Models;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace LearnMVC.Models.Entities
 {
@@ -335,12 +336,39 @@ namespace LearnMVC.Models.Entities
         public void AddNewCategory(AddCategoryVM model)
         {
             // Todo - fixa så att order kollas och ändras
-            Category.Add(new Entities.Category
+            Category.Add(new Category
             {
                 Order = model.Order,
                 Title = model.CategoryTitle,
             });
             SaveChanges();
+        }
+
+        internal void AddNewQuizUnit(AddQuizUnitVM model)
+        {
+            // Todo - fixa så att order kollas och ändras
+            QuizUnit.Add(new QuizUnit
+            {
+                Order = model.Order,
+                InfoTextHeader = model.QuizUnitHeader,
+                InfoTextContent = model.QuizUnitContent,
+                CategoryId = model.SelectedCategoryId,
+            });
+            SaveChanges();
+        }
+
+        public AddQuizUnitVM GetNewQuizUnitVM()
+        {
+            AddQuizUnitVM model = new AddQuizUnitVM
+            {
+                Categories = Category.Select(c => new SelectListItem
+                {
+                    Text = c.Title,
+                    Value = c.CategoryId.ToString(),
+                })
+                .ToArray(),
+            };
+            return model;
         }
     }
 }

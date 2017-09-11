@@ -326,5 +326,10 @@ namespace LearnMVC.Models.Entities
                 return false;
             }
         }
+
+        public bool MemberIsAdmin(string v)
+        {
+            return (bool)Member.Single(m => m.MemberId == v).IsAdmin;
+        }
     }
 }

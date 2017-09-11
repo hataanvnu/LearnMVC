@@ -4,11 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using LearnMVC.Models.View_Models;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace LearnMVC.Controllers
 {
+    [Authorize]
     public class AdminController : Controller
     {
         // GET: /<controller>/
@@ -16,18 +18,17 @@ namespace LearnMVC.Controllers
         {
             return View();
         }
+        
+        [HttpGet]
+        public IActionResult AddCategory()
+        {
+            return View();
+        }
 
         [HttpPost]
-        public string Login(MembersLoginVM model)
+        public string AddCategory(AddCategoryVM model)
         {
-            if (User.Identity.IsAuthenticated)
-            {
-                return $"Du är inloggad som {User.Identity.Name}";
-            }
-            else
-            {
-                return "no.";
-            }
+            return model.CategoryTitle;
         }
     }
 }

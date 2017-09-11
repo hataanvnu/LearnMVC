@@ -1,0 +1,11 @@
+﻿@model AddCategoryVM
+
+    <form asp-controller="Admin" asp-action="AddCategory">
+        <label asp-for="@Model.CategoryTitle"></label>
+        <input asp-for="@Model.CategoryTitle" />
+        <span asp-validation-for="@Model.CategoryTitle"></span>
+
+
+
+        <button type="submit">Summon Unicorns!</button>
+    </form>

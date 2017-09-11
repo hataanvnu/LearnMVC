@@ -8,6 +8,7 @@ using LearnMVC.Models.View_Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using LearnMVC.Models.Entities;
+using System.Threading;
 
 // For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -41,6 +42,11 @@ namespace LearnMVC.Controllers
         public IActionResult Index()
         {
             string memberID = userManager.GetUserId(User);
+            if (context.MemberIsAdmin(memberID))
+            {
+                return RedirectToAction(nameof(AdminController.Index), "Admin");
+            }
+
 
             var membersIndexVM = context.GetMembersIndexVMById(memberID, User.Identity.Name);
 
@@ -117,6 +123,8 @@ namespace LearnMVC.Controllers
             }
 
             // Todo - Kolla om den som loggade in var en admin och skicka i så fall till /Admin/Index istället
+            // Sker i index istället?
+            
 
             return RedirectToAction(nameof(Index));
         }

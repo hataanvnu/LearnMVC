@@ -8,6 +8,7 @@ namespace LearnMVC.Models.Entities
     {
         public virtual DbSet<Answer> Answer { get; set; }
         public virtual DbSet<Category> Category { get; set; }
+        public virtual DbSet<Member> Member { get; set; }
         public virtual DbSet<Progress> Progress { get; set; }
         public virtual DbSet<Question> Question { get; set; }
         public virtual DbSet<QuizUnit> QuizUnit { get; set; }
@@ -54,6 +55,17 @@ namespace LearnMVC.Models.Entities
                     .HasMaxLength(30);
             });
 
+            modelBuilder.Entity<Member>(entity =>
+            {
+                entity.ToTable("Member", "Quiz");
+
+                entity.Property(e => e.MemberId)
+                    .HasColumnName("MemberID")
+                    .ValueGeneratedNever();
+
+                entity.Property(e => e.IsAdmin).HasDefaultValueSql("('false')");
+            });
+
             modelBuilder.Entity<Progress>(entity =>
             {
                 entity.ToTable("Progress", "Quiz");
@@ -80,6 +92,10 @@ namespace LearnMVC.Models.Entities
             {
                 entity.ToTable("Question", "Quiz");
 
+                entity.HasIndex(e => new { e.Order, e.QuizUnitId })
+                    .HasName("UniqueOrder")
+                    .IsUnique();
+
                 entity.Property(e => e.QuestionId).HasColumnName("QuestionID");
 
                 entity.Property(e => e.QuestionText).IsRequired();
@@ -96,6 +112,10 @@ namespace LearnMVC.Models.Entities
             {
                 entity.ToTable("QuizUnit", "Quiz");
 
+                entity.HasIndex(e => new { e.Order, e.CategoryId })
+                    .HasName("UniqueQuizUnitOrder")
+                    .IsUnique();
+
                 entity.Property(e => e.QuizUnitId).HasColumnName("QuizUnitID");
 
                 entity.Property(e => e.CategoryId).HasColumnName("CategoryID");
@@ -106,6 +126,5 @@ namespace LearnMVC.Models.Entities
                     .HasConstraintName("FK__QuizUnit__Catego__0E6E26BF");
             });
         }
-
     }
 }

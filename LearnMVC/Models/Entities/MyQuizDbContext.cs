@@ -251,13 +251,39 @@ namespace LearnMVC.Models.Entities
                 .Include(p => p.QuizUnit)
                 .ToArray();
 
+            var numberOfQuestionsInCategory = Question
+                .Where(q => q.QuizUnit.CategoryId == categoryId)
+                .Count();
+
             if (doneQuestionsInCategory.Length == 0)
             {
                 return GetFirstQuizUnitInCategory(categoryId);
             }
+            else if (doneQuestionsInCategory.Length == numberOfQuestionsInCategory)
+            {
+                // Alla frågor i kategorin är avklarade, navigera till nästa
+                var possibleComingCategories = Category
+                    .Where(c => c.Order > Category.Single(d => d.CategoryId == categoryId).Order);
+
+                if (possibleComingCategories.Count() == 0)
+                {
+                    // Det finns inga mer kategorier att köra
+                    // Todo - är det rimligt att returnera null eller borde jag göra något vettigare?
+                    return null;
+                }
+                else
+                {
+                    var nextCategoryId = possibleComingCategories
+                        .OrderBy(c => c.Order)
+                        .First()
+                        .CategoryId;
+
+                    return GetQuizUnit(nextCategoryId, memberId);
+                }
+
+            }
             else
             {
-
                 // Hämta högsta ordern på ett avklarat quizunit i current category
                 int topDoneQuizUnitOrder = doneQuestionsInCategory
                     .Max(q => q.QuizUnit.Order);

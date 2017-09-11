@@ -28,8 +28,14 @@
         <div class="row" id="logobox" style="padding-top:10px">
             <img src="~/Images/LearnMVClogo.png" width="170" style="float:left" />
         </div>
+        <!--GO TO MY PROFIL-->
+        <div class="row" id="sidebarzItem" style="padding:5px; background-color:#ff28ce" onclick="GoToIndex()">
+            <h4>
+                My profile
+            </h4>
+        </div>
         <div>
-            @*@Html.Partial("_Sidebar", Model.SidebarVMList)*@
+            @Html.Partial("_Sidebar", Model.SidebarArray)
         </div>
     </div>
 </div> <!--END ROW-->

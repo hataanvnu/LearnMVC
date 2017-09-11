@@ -14,5 +14,6 @@ namespace LearnMVC.Models.View_Models
 
         public int QuestionId { get; set; }
 
+        public SidebarVM[] SidebarArray { get; set; }
     }
 }

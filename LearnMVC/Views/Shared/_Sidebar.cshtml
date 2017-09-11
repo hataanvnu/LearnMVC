@@ -7,9 +7,8 @@
             <div id="sidebarzItemDone" onclick="DoStuff(@category.CategoryID)">
                 <div class="row">
                     <div class="col-md-6">
-                        @category.CategoryName <br />
-                        Extract <br />
-                        Completed
+                        <p>@category.CategoryName <br />
+                        Completed</p>
                     </div>
                     <div class="col-md-5">
                         <img src="~/Images/Check.png" width="50" style="padding-top:10px;float:right;padding-right:10px;" />
@@ -22,9 +21,10 @@
             <div id="sidebarzItem" onclick="DoStuff(@category.CategoryID)">
                 <div class="row">
                     <div class="col-md-6">
-                        @category.CategoryName <br />
-                        Extract <br />
-                        Completed
+                        <p>
+                            @category.CategoryName <br />
+                        Go!
+                    </p>
                     </div>
                     <div class="col-md-5">
 

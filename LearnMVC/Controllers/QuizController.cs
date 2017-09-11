@@ -48,6 +48,7 @@ namespace LearnMVC.Controllers
             QuizQuestionVM qqvm = context.GetNextQuestion(id, userManager.GetUserId(User));
             if (qqvm != null)
             {
+                qqvm.SidebarArray = context.GetSidebarVMList(userManager.GetUserId(User));
                 return View(qqvm);
             }
             else

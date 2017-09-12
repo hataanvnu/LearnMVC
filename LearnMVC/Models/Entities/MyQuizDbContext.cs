@@ -450,15 +450,85 @@ namespace LearnMVC.Models.Entities
             // Todo - delete progress
             var q = Progress
                 .Where(p => p.Question.QuizUnit.CategoryId == categoryId)
-                
-                //.Include(p => p.Question)
-                //.Include(p => p.Question.QuizUnit)
                 .Where(p => p.MemberId == memberId);
 
             foreach (var item in q)
             {
                 Progress.Remove(item);
             }
+            SaveChanges();
+        }
+
+        internal void ResetAllProgressForMember(string memberId)
+        {
+            var q = Progress
+                .Where(p => p.MemberId == memberId);
+
+            foreach (var item in q)
+            {
+                Progress.Remove(item);
+            }
+            SaveChanges();
+        }
+
+        internal QuizOverviewVM GetQuizOverviewVM()
+        {
+
+            List<Category> que = new List<Category>();
+            foreach (var category in Category)
+            {
+                List<QuizUnit> porque = new List<QuizUnit>();
+                foreach (var quizUnit in QuizUnit)
+                {
+                    List<Question> donde = new List<Question>();
+                    foreach (var question in Question)
+                    {
+                        if (question.QuizUnitId == quizUnit.QuizUnitId)
+                        {
+                            donde.Add(question);
+                        }
+                    }
+                    if (quizUnit.CategoryId == category.CategoryId)
+                    {
+                        porque.Add(quizUnit);
+                    }
+                }
+                que.Add(category);
+            }
+
+
+            QuizOverviewVM model = new QuizOverviewVM
+            {
+                Categories = que.ToArray(),
+                NumberOfCategories = Category.Count(),
+                NumberOfQuizUnits = QuizUnit.Count(),
+                NumberOfQuestions = Question.Count(),
+            };
+
+            return model;
+        }
+
+        internal EditCategoryVM GetEditCategoryVMById(int id)
+        {
+            var q = Category
+                .SingleOrDefault(c => c.CategoryId == id);
+
+            EditCategoryVM model = new EditCategoryVM
+            {
+                CategoryTitle = q.Title,
+                Order = q.Order,
+            };
+
+            return model;
+        }
+
+        internal void UpdateCategory(int id, EditCategoryVM newModel)
+        {
+            var oldCategory = Category.SingleOrDefault(c => c.CategoryId == id);
+
+            oldCategory.Title = newModel.CategoryTitle;
+            oldCategory.Order = newModel.Order;
+
             SaveChanges();
         }
     }

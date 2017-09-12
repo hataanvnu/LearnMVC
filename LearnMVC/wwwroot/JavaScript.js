@@ -32,5 +32,24 @@ function ResetCategory(categoryId) {
 
 function ResetCategoryValidated(categoryId) {
     document.location.href = "/Quiz/ResetCategory/" + categoryId + "?isValidated=true";
+}
 
+function Continue(questionId) {
+    document.location.href = "/Quiz/Question/" + questionId;
+}
+
+function Logout() {
+    document.location.href = "/Members/Logout";
+}
+
+function ResetProgress() {
+    document.location.href = "/Members/ResetProgress";
+}
+
+function ResetProgressValidated() {
+    document.location.href = "/Members/ResetProgress?isValidated=true";
+}
+
+function GoToQuizOverview() {
+    document.location.href = "/Admin/QuizOverview";
 }

@@ -1,0 +1,32 @@
+﻿@model QuizOverviewVM
+
+<h3>Stats:</h3>
+<p>Number of categories: @Model.NumberOfCategories
+<br />Number of quiz units: @Model.NumberOfQuizUnits
+<br />Number of questions: @Model.NumberOfQuestions</p>
+
+
+
+<h3>Overview:</h3>
+<ul>
+    @foreach (var category in Model.Categories)
+    {
+        <li>
+            <a asp-controller="Admin" asp-action="EditCategory" asp-route-id="@category.CategoryId">@category.Title</a>
+            <ul>
+                @foreach (var quizUnit in category.QuizUnit)
+                {
+                    <li>
+                        @quizUnit.InfoTextHeader
+                        <ul>
+                            @foreach (var question in quizUnit.Question)
+                            {
+                                <li>@question.QuestionText</li>
+                            }
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+</ul>

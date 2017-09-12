@@ -1,32 +1,36 @@
 ﻿@model MembersIndexVM
 <div class="container-fluid">
     <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
-        <h3>Välkommen @Model.UserName</h3>
+        <h3>Welcome @Model.UserName</h3>
         <br />
 
         @if (Model.HasPreviousProgress)
         {
-            <div>
+            <div id="progressContent">
                 <br />
-                <h3>Progress:</h3>
+                <h3>Latest progress:</h3>
                 <br />
                 <p><b>Category:</b> @Model.CategoryName</p>
-                <br />
+
                 <p><b>Quiz-Unit:</b> @Model.QuizUnitName</p>
-                <br />
+
                 <p><b>Question:</b> @Model.QuestionText</p>
-                <br />
 
-
-                <a asp-controller="Quiz" asp-action="Question" asp-route-id="@Model.QuestionID">Vill du fortsätta där du avslutade? Tryck här!</a>
+                <button onclick="Continue(@Model.QuestionID)">Continue</button>
+                <button onclick="ResetProgress()">Reset Progress</button>
             </div>
         }
         else
         {
             <div>
-                Du verkar inte ha varit här förut. Tryck på en utav kategorierna till högeer för att dra igång!
+                Oooh! Ah Newbie! <br />
+                Click on one of the categories in the menu to start your journey towards becoming an MVC Godess!
             </div>
         }
+
+        <br /> <br />
+        <button onclick="Logout()">Log out</button>
+
     </div>
     <!--HERE IS SIDEBOX-->
 <div class="col-md-3" id="sidebox">

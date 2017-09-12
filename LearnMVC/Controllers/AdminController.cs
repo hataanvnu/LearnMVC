@@ -98,10 +98,25 @@ namespace LearnMVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        //public IActionResult Overview()
-        //{
-        //    OverviewVM model = context.GetOverviewVM();
-        //    return View();
-        //}
+        public IActionResult QuizOverview()
+        {
+            QuizOverviewVM model = context.GetQuizOverviewVM();
+            return View(model);
+        }
+
+        public IActionResult EditCategory(int id)
+        {
+            EditCategoryVM model = context.GetEditCategoryVMById(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult EditCategory(int id, EditCategoryVM model)
+        {
+            context.UpdateCategory(id, model);
+
+            return RedirectToAction(nameof(QuizOverview));
+        }
     }
 }

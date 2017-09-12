@@ -41,11 +41,15 @@ h3, h2, h1 {
     padding: 20px;
     background-color: whitesmoke;
     height: 90vh;
-}   
+}
+
+#progressContent > p, #progressContent > button {
+    margin-left: 20px;
+}
 /*THE SIDEBAR*/
 #sidebox {
     background-color: whitesmoke;
-    height:100vh;
+    height: 100vh;
 }
 #sidebarz {
     color: black;

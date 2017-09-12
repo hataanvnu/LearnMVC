@@ -128,5 +128,26 @@ namespace LearnMVC.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+
+            return RedirectToAction(nameof(Login));
+        }
+
+        public IActionResult ResetProgress(bool isValidated = false)
+        {
+            if (!isValidated)
+            {
+                return View();
+            }
+            else
+            {
+                // todo - resetta progress
+                context.ResetAllProgressForMember(userManager.GetUserId(User));
+                return RedirectToAction(nameof(Index));
+            }
+        }
     }
 }

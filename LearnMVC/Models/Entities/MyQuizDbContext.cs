@@ -60,6 +60,7 @@ namespace LearnMVC.Models.Entities
                 .Include(p => p.Question)
                 .Include(p => p.Question.QuizUnit)
                 .Include(p => p.Question.QuizUnit.Category)
+                .OrderByDescending(p => p.DateCreated)
                 .FirstOrDefault(m => m.MemberId == id);
 
             if (latestProgress == null)
@@ -290,6 +291,7 @@ namespace LearnMVC.Models.Entities
 
                 // Hämta alla quizunits med högre order.
                 var nextQuizUnits = QuizUnit
+                    .Where(q => q.CategoryId == categoryId)
                     .Where(q => q.Order > topDoneQuizUnitOrder);
 
                 if (nextQuizUnits.Count() > 0)

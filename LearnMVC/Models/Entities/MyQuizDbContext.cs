@@ -150,6 +150,7 @@ namespace LearnMVC.Models.Entities
             Question lastDoneQuestionInQuizUnit;
             if (doneQuestionsInQuizUnitForMember.Count() > 0)
             {
+                // Användaren har avklarade frågor sedan innan i det här quizunitet
                 lastDoneQuestionInQuizUnit = doneQuestionsInQuizUnitForMember
                     .Include(p => p.Question)
                     .OrderBy(p => p.Question.Order)
@@ -159,6 +160,7 @@ namespace LearnMVC.Models.Entities
             }
             else
             {
+                // Användaren har inga avklarade frågor i detta quizunit
                 lastDoneQuestionInQuizUnit = null;
             }
 
@@ -260,7 +262,7 @@ namespace LearnMVC.Models.Entities
             {
                 return GetFirstQuizUnitInCategory(categoryId);
             }
-            else if (doneQuestionsInCategory.Length == numberOfQuestionsInCategory)
+            else if (doneQuestionsInCategory.Length >= numberOfQuestionsInCategory)
             {
                 // Alla frågor i kategorin är avklarade, navigera till nästa
                 var possibleComingCategories = Category
@@ -443,5 +445,21 @@ namespace LearnMVC.Models.Entities
             return model;
         }
 
+        internal void ResetCategoryForMember(int categoryId, string memberId)
+        {
+            // Todo - delete progress
+            var q = Progress
+                .Where(p => p.Question.QuizUnit.CategoryId == categoryId)
+                
+                //.Include(p => p.Question)
+                //.Include(p => p.Question.QuizUnit)
+                .Where(p => p.MemberId == memberId);
+
+            foreach (var item in q)
+            {
+                Progress.Remove(item);
+            }
+            SaveChanges();
+        }
     }
 }

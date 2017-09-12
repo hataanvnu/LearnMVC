@@ -26,3 +26,11 @@ function GoToCreateNew(what) {
 
 }
 
+function ResetCategory(categoryId) {
+    document.location.href = "/Quiz/ResetCategory/" + categoryId;
+}
+
+function ResetCategoryValidated(categoryId) {
+    document.location.href = "/Quiz/ResetCategory/" + categoryId + "?isValidated=true";
+
+}

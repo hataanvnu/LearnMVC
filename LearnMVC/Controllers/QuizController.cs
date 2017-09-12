@@ -53,6 +53,7 @@ namespace LearnMVC.Controllers
             }
             else
             {
+                // finns inga mer frågor i det här quiz-unitet
                 int categoryId = context.GetCategoryIdByQuizUnitId(id);
                 return RedirectToAction(nameof(Text), new { id = categoryId });
             }
@@ -72,6 +73,20 @@ namespace LearnMVC.Controllers
 
             return RedirectToAction(nameof(Question), new { id = context.GetQuizUnitIdByQuestionId(questionId) });
             //return null;
+        }
+
+        public IActionResult ResetCategory(int id /*CategoryId*/, bool isValidated = false)
+        {
+            if (!isValidated)
+            {
+                return View(id);
+            }
+            else
+            {
+                // todo - resetta progress
+                context.ResetCategoryForMember(id, userManager.GetUserId(User));
+                return RedirectToAction(nameof(Text), new { id = id });
+            }
         }
     }
 }

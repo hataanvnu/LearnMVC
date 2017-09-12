@@ -20,14 +20,6 @@ namespace LearnMVC
 
         public Startup(IConfiguration configuration)
         {
-            //var builder = new ConfigurationBuilder();
-            //if (env.IsDevelopment())
-            //    builder.AddUserSecrets<Startup>();
-            //else
-            //  builder.AddEnvironmentVariables();
-
-            //this.configuration = builder.Build();
-
             this.configuration = configuration;
         }
 
@@ -35,9 +27,8 @@ namespace LearnMVC
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            // todo - lägg connection string i secrets
-
-            var connString = configuration.GetConnectionString("DefaultConnection");
+            // Todo - connection string är här temporärt för att pröva hur felsidorna ser ut i production.
+            var connString = /*configuration.GetConnectionString("DefaultConnection");*/ "Data Source=parskyserver.database.windows.net;Initial Catalog=Parsky;Integrated Security=False;User ID=Parsky;Password=Johan1234;Connect Timeout=30;Encrypt=False;TrustServerCertificate=True;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
             services.AddDbContext<QuizDbContext>(o => o.UseSqlServer(connString));
             services.AddDbContext<IdentityDbContext>(o => o.UseSqlServer(connString));
 
@@ -60,6 +51,15 @@ namespace LearnMVC
             
             app.UseStaticFiles();
             app.UseAuthentication();
+
+            // Fånga serverfel
+            if (env.IsDevelopment())
+                app.UseDeveloperExceptionPage();
+            else
+                app.UseExceptionHandler("/Error/ServerError");
+
+            // Fånga Http-fel
+            app.UseStatusCodePagesWithRedirects("/Error/HttpError/{0}");
 
             app.UseMvc(routes =>
             {

@@ -70,3 +70,9 @@ h3, h2, h1 {
     /*border:3px solid white;*/
 }
 
+/*Den jävla stora textrutan, MAGDA*/
+.bigTextBox {
+    display: block;
+    min-width: 100%;
+    max-width: 100%;
+}

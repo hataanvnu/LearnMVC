@@ -1,0 +1,26 @@
+﻿@model EditQuizUnitVM
+
+<div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
+    <h3>Redigera quizet, Admin!</h3>
+    <br />
+    UNICORNS!
+    <h2>Edit Quiz Unit</h2>
+    <form asp-controller="Admin" asp-action="EditQuizUnit">
+        <label asp-for="@Model.QuizUnitHeader"></label>
+        <input asp-for="@Model.QuizUnitHeader" />
+        <span asp-validation-for="@Model.QuizUnitHeader"></span>
+        <br />
+        <br />
+        <label asp-for="@Model.QuizUnitContent"></label>
+        <input asp-for="@Model.QuizUnitContent" />
+        <span asp-validation-for="@Model.QuizUnitContent"></span>
+        <br />
+        <br />
+        <label asp-for="@Model.SelectedCategoryId"></label>
+        <select asp-for="@Model.SelectedCategoryId" asp-items="@Model.Categories"></select>
+        <span asp-validation-for="SelectedCategoryId"></span>
+
+        <button type="submit">Summon Unicorns!</button>
+    </form>
+
+</div>

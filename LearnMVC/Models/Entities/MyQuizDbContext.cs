@@ -600,10 +600,8 @@ namespace LearnMVC.Models.Entities
 
             foreach (var item in oldQuestion.Answer)
             {
-                //var del = Answer.Single(a => a.AnswerId == item.AnswerId);
                 Answer.Remove(Answer.Single(a => a.AnswerId == item.AnswerId));
             }
-                //oldQuestion.Answer.Remove(item);
             
 
             for (int i = 0; i < newModel.Answers.Length; i++)

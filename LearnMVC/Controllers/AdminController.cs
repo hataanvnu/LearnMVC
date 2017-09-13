@@ -33,10 +33,13 @@ namespace LearnMVC.Controllers
         // GET: /<controller>/
         public IActionResult Index()
         {
-            string memberID = userManager.GetUserId(User);
-            var membersIndexVM = context.GetMembersIndexVMById(memberID, User.Identity.Name);
-            membersIndexVM.SidebarVMList = context.GetSidebarVMList(memberID);
-            return View(membersIndexVM);
+            //string memberID = userManager.GetUserId(User);
+            //var membersIndexVM = context.GetMembersIndexVMById(memberID, User.Identity.Name);
+            //membersIndexVM.SidebarVMList = context.GetSidebarVMList(memberID);
+            //return View(membersIndexVM);
+
+            QuizOverviewVM model = context.GetQuizOverviewVM();
+            return View(model);
         }
         
         [HttpGet]
@@ -98,12 +101,6 @@ namespace LearnMVC.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult QuizOverview()
-        {
-            QuizOverviewVM model = context.GetQuizOverviewVM();
-            return View(model);
-        }
-
         public IActionResult EditCategory(int id)
         {
             EditCategoryVM model = context.GetEditCategoryVMById(id);
@@ -116,7 +113,7 @@ namespace LearnMVC.Controllers
         {
             context.UpdateCategory(id, model);
 
-            return RedirectToAction(nameof(QuizOverview));
+            return RedirectToAction(nameof(Index));
         }
 
 
@@ -132,7 +129,7 @@ namespace LearnMVC.Controllers
         {
             context.UpdateQuizUnit(id, model);
 
-            return RedirectToAction(nameof(QuizOverview));
+            return RedirectToAction(nameof(Index));
         }
 
 
@@ -148,7 +145,7 @@ namespace LearnMVC.Controllers
         {
             context.UpdateQuestion(id, correctAnswer, model);
 
-            return RedirectToAction(nameof(QuizOverview));
+            return RedirectToAction(nameof(Index));
         }
     }
 }

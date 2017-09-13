@@ -79,7 +79,12 @@ namespace LearnMVC.Controllers
         {
             if (!isValidated)
             {
-                return View(id);
+                ResetCategoryVM model = new ResetCategoryVM
+                {
+                    CategoryId = id,
+                    SidebarList = context.GetSidebarVMList(userManager.GetUserId(User)),
+                };
+                return View(model);
             }
             else
             {

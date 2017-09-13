@@ -1,11 +1,11 @@
-﻿@model int
+﻿@model ResetCategoryVM
 
 <div class="container-fluid">
     <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
 
         <p>Do you want to reset your progress for this category and play it again?</p>
 
-        <button onclick="ResetCategoryValidated(@Model)" class="btn btn-default">Yes!</button>
+        <button onclick="ResetCategoryValidated(@Model.CategoryId)" class="btn btn-default">Yes!</button>
 
         <button onclick="GoToIndex()" class="btn btn-default">No</button>
 
@@ -23,7 +23,7 @@
         <img src="~/Images/LearnMVClogo.png" width="170" style="float:left" />
     </div>
     <div>
-        @*@Html.Partial("_Sidebar", Model.SidebarVMList)*@
+        @Html.Partial("_Sidebar", Model.SidebarList)
     </div>
 </div>
-</div> <!--END ROW-->
+@*</div> <!--END ROW-->*@

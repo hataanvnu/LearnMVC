@@ -93,5 +93,15 @@ namespace LearnMVC.Controllers
                 return RedirectToAction(nameof(Text), new { id = id });
             }
         }
+
+        public IActionResult Finished()
+        {
+            QuizFinishedVM model = new QuizFinishedVM
+            {
+                SidebarArray = context.GetSidebarVMList(userManager.GetUserId(User)),
+            };
+
+            return View(model);
+        }
     }
 }

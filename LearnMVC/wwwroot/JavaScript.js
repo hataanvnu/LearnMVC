@@ -17,11 +17,11 @@ function GoToResult() {
 }
 
 function GoToCreateNew(what) {
-    if (what == 1)
+    if (what === 1)
         document.location.href = "/Admin/AddCategory";
-    else if (what == 2)
+    else if (what === 2)
         document.location.href = "/Admin/AddQuizUnit";
-    else if (what == 3)
+    else if (what === 3)
         document.location.href = "/Admin/AddQuestion";
 
 }

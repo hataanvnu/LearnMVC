@@ -8,6 +8,10 @@ namespace LearnMVC.Models.View_Models
 {
     public class QuizQuestionVM
     {
+        public string CategoryTitle { get; set; }
+
+        public string QuizUnitHeader { get; set; }
+
         public string QuestionText { get; set; }
 
         public Answer[] Answers { get; set; }

@@ -7,7 +7,7 @@
     <h2>Edit Quiz Unit</h2>
     <form asp-controller="Admin" asp-action="EditQuestion">
         <label asp-for="QuestionText"></label>
-        <input asp-for="QuestionText" />
+        <textarea asp-for="QuestionText" class="bigTextBox"></textarea>
         <span asp-validation-for="QuestionText"></span>
         <br />
         <br />

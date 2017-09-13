@@ -4,7 +4,9 @@
 
         <form asp-controller="Quiz" asp-action="Question" asp-route-questionId="@Model.QuestionId">
 
-            <h3>@Model.QuestionText</h3>
+            <h3>@Model.CategoryTitle</h3>
+            <h4>@Model.QuizUnitHeader</h4>
+            <h5>@Model.QuestionText</h5>
 
             @if (TempData["WrongAnswer"] != null)
             {

@@ -57,3 +57,4 @@ function GoToQuizOverview() {
 function Yay() {
     alert("CORRECT!");
 }
+

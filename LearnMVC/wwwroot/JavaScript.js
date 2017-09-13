@@ -55,5 +55,5 @@ function GoToQuizOverview() {
 }
 
 function Yay() {
-    alert("Correct answer!");
+    alert("CORRECT!");
 }

@@ -53,3 +53,7 @@ function ResetProgressValidated() {
 function GoToQuizOverview() {
     document.location.href = "/Admin/QuizOverview";
 }
+
+function Yay() {
+    alert("Correct answer!");
+}

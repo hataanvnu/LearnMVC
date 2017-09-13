@@ -1,11 +1,26 @@
-﻿@model int
+﻿@model MembersIndexVM
+<div class="container-fluid">
+    <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
 
-<div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
+        <p>Do you want to reset all of your progress? This cannot be undone.</p>
 
-    <p>Do you want to reset all of your progress? This cannot be undone.</p>
+        <button onclick="ResetProgressValidated(@Model)" class="btn btn-default">Yes!</button>
 
-    <button onclick="ResetProgressValidated(@Model)">Yes!</button>
+        <button onclick="GoToIndex()" class="btn btn-default">No</button>
 
-    <button onclick="GoToIndex()">No</button>
+    </div>
+
+
+    <br /> <br />
+    <button onclick="Logout()" class="btn btn-default">Log out</button>
 
 </div>
+<!--HERE IS SIDEBOX-->
+<div class="col-md-3" id="sidebox">
+    <div class="row" id="logobox" style="padding-top:10px">
+        <img src="~/Images/LearnMVClogo.png" width="170" style="float:left" />
+    </div>
+    <div>
+        @*@Html.Partial("_Sidebar", Model.SidebarVMList)*@
+    </div>
+</div> <!--END ROW-->

@@ -1,20 +1,15 @@
-﻿@model QuizTextVM
+﻿@model QuizQuestionVM
 <div class="container-fluid">
     <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
-        <h3>@Model.CategoryName</h3>
 
-        <h4>@Model.TextHeader</h4>
-        <p>@Model.TextContent</p>
+        Good job! You just finished this category! 
+        <img src="http://www.animatedimages.org/data/media/1103/animated-congratulation-image-0092.gif" border="0" alt="animated-congratulation-image-0092" />
 
-        
- 
-        <button onclick="Plus(@Model.QuizUnitId)" class="btn btn-default">Next!</button>
+        <button class="btn btn-default" onclick="next()">Next Category!</button> 
 
-        @*<a asp-controller="Quiz" asp-action="Question">Nästa ></a>*@
     </div>
     <!--HERE IS SIDEBOX-->
     <div class="col-md-3" id="sidebox">
-        <!--THIS IS LOGO-->
         <div class="row" id="logobox" style="padding-top:10px">
             <img src="~/Images/LearnMVClogo.png" width="170" style="float:left" />
         </div>
@@ -24,11 +19,8 @@
                 My profile
             </h4>
         </div>
-        <!--HERE COMES ALL BARSPARTS-->
         <div>
             @Html.Partial("_Sidebar", Model.SidebarArray)
         </div>
     </div>
-</div>
-
-
+</div> <!--END ROW-->

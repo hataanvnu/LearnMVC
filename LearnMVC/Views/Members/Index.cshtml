@@ -16,8 +16,8 @@
 
                 <p><b>Question:</b> @Model.QuestionText</p>
 
-                <button onclick="Continue(@Model.QuestionID)">Continue</button>
-                <button onclick="ResetProgress()">Reset Progress</button>
+                <button onclick="Continue(@Model.QuestionID)" class="btn btn-default">Continue</button>
+                <button onclick="ResetProgress()" class="btn btn-default">Reset Progress</button>
             </div>
         }
         else
@@ -29,7 +29,7 @@
         }
 
         <br /> <br />
-        <button onclick="Logout()">Log out</button>
+        <button onclick="Logout()" class="btn btn-default">Log out</button>
 
     </div>
     <!--HERE IS SIDEBOX-->

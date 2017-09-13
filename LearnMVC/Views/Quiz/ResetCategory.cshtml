@@ -1,11 +1,29 @@
 ﻿@model int
 
-<div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
+<div class="container-fluid">
+    <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
 
-    <p>Do you want to reset your progress for this category and play it again?</p>
+        <p>Do you want to reset your progress for this category and play it again?</p>
 
-    <button onclick="ResetCategoryValidated(@Model)">Yes!</button>
+        <button onclick="ResetCategoryValidated(@Model)" class="btn btn-default">Yes!</button>
 
-    <button onclick="GoToIndex()">No</button>
+        <button onclick="GoToIndex()" class="btn btn-default">No</button>
+
+
+    </div>
+
+
+    <br /> <br />
+    <button onclick="Logout()" class="btn btn-default">Log out</button>
 
 </div>
+<!--HERE IS SIDEBOX-->
+<div class="col-md-3" id="sidebox">
+    <div class="row" id="logobox" style="padding-top:10px">
+        <img src="~/Images/LearnMVClogo.png" width="170" style="float:left" />
+    </div>
+    <div>
+        @*@Html.Partial("_Sidebar", Model.SidebarVMList)*@
+    </div>
+</div>
+</div> <!--END ROW-->

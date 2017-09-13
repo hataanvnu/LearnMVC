@@ -118,5 +118,37 @@ namespace LearnMVC.Controllers
 
             return RedirectToAction(nameof(QuizOverview));
         }
+
+
+        public IActionResult EditQuizUnit(int id)
+        {
+            EditQuizUnitVM model = context.GetEditQuizUnitVMById(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult EditQuizUnit(int id, EditQuizUnitVM model)
+        {
+            context.UpdateQuizUnit(id, model);
+
+            return RedirectToAction(nameof(QuizOverview));
+        }
+
+
+        public IActionResult EditQuestion(int id)
+        {
+            EditQuestionVM model = context.GetEditQuestionVMById(id);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult EditQuestion(int id, int correctAnswer, EditQuestionVM model)
+        {
+            context.UpdateQuestion(id, correctAnswer, model);
+
+            return RedirectToAction(nameof(QuizOverview));
+        }
     }
 }

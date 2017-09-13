@@ -6,13 +6,13 @@
         UNICORNS!
         <h2>Add Quiz Unit</h2>
         <form asp-controller="Admin" asp-action="AddQuestion">
-            <label asp-for="@Model.QuestionText"></label>
-            <input asp-for="@Model.QuestionText" />
-            <span asp-validation-for="@Model.QuestionText"></span>
+            <label asp-for="QuestionText"></label>
+            <input asp-for="QuestionText" />
+            <span asp-validation-for="QuestionText"></span>
             <br />
             <br />
-            <label asp-for="@Model.SelectedQuizUnitId"></label>
-            <select asp-for="@Model.SelectedQuizUnitId" asp-items="@Model.PossibleQuizUnits"></select>
+            <label asp-for="SelectedQuizUnitId"></label>
+            <select asp-for="SelectedQuizUnitId" asp-items="@Model.PossibleQuizUnits"></select>
             <span asp-validation-for="SelectedQuizUnitId"></span>
             <br />
             <br />
@@ -20,8 +20,8 @@
             @for (int i = 0; i < Model.Answers.Length; i++)
             {
                 <div class="radio" data-toggle="radio">
-                    <label asp-for="@Model.Answers"><input type="radio" name="correctAnswer" value="@i" /></label>
-                    <input asp-for="@Model.Answers" />
+                    <label asp-for="@Model.Answers[i]"><input type="radio" name="correctAnswer" value="@i" /></label>
+                    <input asp-for="@Model.Answers[i]" />
                     <span asp-validation-for="@Model.Answers"></span>
                 </div>
                 <br />

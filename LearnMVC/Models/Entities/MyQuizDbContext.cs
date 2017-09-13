@@ -447,7 +447,6 @@ namespace LearnMVC.Models.Entities
 
         internal void ResetCategoryForMember(int categoryId, string memberId)
         {
-            // Todo - delete progress
             var q = Progress
                 .Where(p => p.Question.QuizUnit.CategoryId == categoryId)
                 .Where(p => p.MemberId == memberId);
@@ -528,6 +527,94 @@ namespace LearnMVC.Models.Entities
 
             oldCategory.Title = newModel.CategoryTitle;
             oldCategory.Order = newModel.Order;
+
+            SaveChanges();
+        }
+
+        internal EditQuizUnitVM GetEditQuizUnitVMById(int id)
+        {
+            var q = QuizUnit
+                .SingleOrDefault(c => c.QuizUnitId == id);
+
+            EditQuizUnitVM model = new EditQuizUnitVM
+            {
+                QuizUnitHeader = q.InfoTextHeader,
+                QuizUnitContent = q.InfoTextContent,
+                Order = q.Order,
+                SelectedCategoryId = (int)q.CategoryId,
+                Categories = Category.Select(c => new SelectListItem
+                {
+                    Text = c.Title,
+                    Value = c.CategoryId.ToString(),
+                })
+                .ToArray(),
+            };
+
+            return model;
+        }
+
+        internal void UpdateQuizUnit(int id, EditQuizUnitVM newModel)
+        {
+            var oldQuizUnit = QuizUnit
+                .Single(q => q.QuizUnitId == id);
+
+            oldQuizUnit.InfoTextHeader = newModel.QuizUnitHeader;
+            oldQuizUnit.InfoTextContent = newModel.QuizUnitContent;
+            oldQuizUnit.Order = newModel.Order;
+            oldQuizUnit.CategoryId = newModel.SelectedCategoryId;
+
+            SaveChanges();
+        }
+
+        internal EditQuestionVM GetEditQuestionVMById(int id)
+        {
+            var q = Question
+                .Include(c => c.Answer)
+                .SingleOrDefault(c => c.QuestionId == id);
+
+            EditQuestionVM model = new EditQuestionVM
+            {
+                Answers = q.Answer.Select(a => a.AnswerText).ToArray(),
+                Order = q.Order,
+                QuestionText = q.QuestionText,
+                SelectedQuizUnitId = (int)q.QuizUnitId,
+                PossibleQuizUnits = QuizUnit.Select(c => new SelectListItem
+                {
+                    Text = c.InfoTextHeader,
+                    Value = c.QuizUnitId.ToString(),
+                })
+                .ToArray(),
+            };
+            return model;
+        }
+
+        internal void UpdateQuestion(int id, int correctAnswer, EditQuestionVM newModel)
+        {
+            var oldQuestion = Question.Include(q => q.Answer).SingleOrDefault(q => q.QuestionId == id);
+
+            oldQuestion.Order = newModel.Order;
+            oldQuestion.QuestionText = newModel.QuestionText;
+            oldQuestion.QuizUnitId = newModel.SelectedQuizUnitId;
+
+
+
+            foreach (var item in oldQuestion.Answer)
+            {
+                //var del = Answer.Single(a => a.AnswerId == item.AnswerId);
+                Answer.Remove(Answer.Single(a => a.AnswerId == item.AnswerId));
+            }
+                //oldQuestion.Answer.Remove(item);
+            
+
+            for (int i = 0; i < newModel.Answers.Length; i++)
+            {
+                oldQuestion.Answer.Add(new Answer
+                {
+                    AnswerText = newModel.Answers[i],
+                    IsCorrect = i == correctAnswer,
+                    Question = oldQuestion,
+                });
+            }
 
             SaveChanges();
         }

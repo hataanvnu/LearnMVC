@@ -60,13 +60,18 @@ namespace LearnMVC.Controllers
         {
             MembersRegisterVM model = new MembersRegisterVM
             {
-                HeadersVM = new NoSidebarHeadersVM
-                {
-                    BigHeader = "Learn MVC!",
-                    SmallHeader = "First, register:",
-                }
+                HeadersVM = GetRegisterHeaders(),
             };
             return View(model);
+        }
+
+        private NoSidebarHeadersVM GetRegisterHeaders()
+        {
+            return new NoSidebarHeadersVM
+            {
+                BigHeader = "Learn MVC!",
+                SmallHeader = "First, register:",
+            };
         }
 
         [HttpPost]
@@ -75,7 +80,10 @@ namespace LearnMVC.Controllers
         {
             #region Validera Vy-modellen
             if (!ModelState.IsValid)
+            {
+                model.HeadersVM = GetRegisterHeaders();
                 return View(model);
+            }
             #endregion
 
 
@@ -87,6 +95,7 @@ namespace LearnMVC.Controllers
             var result = await userManager.CreateAsync(new IdentityUser(model.UserName), model.Password);
             if (!result.Succeeded)
             {
+                model.HeadersVM = GetRegisterHeaders();
                 // Lägg till fel som visas i formuläret
                 ModelState.AddModelError("UserName", result.Errors.First().Description);
                 return View(model);
@@ -110,13 +119,19 @@ namespace LearnMVC.Controllers
         {
             MembersLoginVM model = new MembersLoginVM
             {
-                HeadersVM = new NoSidebarHeadersVM
-                {
-                    BigHeader = "Learn MVC!",
-                    SmallHeader = "Nice to see you again!",
-                }
+                HeadersVM = GetLoginHeaders(),
             };
             return View(model);
+        }
+
+        [NonAction]
+        private NoSidebarHeadersVM GetLoginHeaders()
+        {
+            return new NoSidebarHeadersVM
+            {
+                BigHeader = "Learn MVC!",
+                SmallHeader = "Nice to see you again!",
+            };
         }
 
         [HttpPost]
@@ -126,6 +141,7 @@ namespace LearnMVC.Controllers
         {
             if (!ModelState.IsValid)
             {
+                model.HeadersVM = GetLoginHeaders();
                 return View(model);
             }
             await signInManager.SignOutAsync();
@@ -133,6 +149,7 @@ namespace LearnMVC.Controllers
             var result = await signInManager.PasswordSignInAsync(model.UserName, model.Password, false, false);
             if (!result.Succeeded)
             {
+                model.HeadersVM = GetLoginHeaders();
                 ModelState.AddModelError(nameof(MembersLoginVM.UserName), result.ToString());
                 return View(model);
             }

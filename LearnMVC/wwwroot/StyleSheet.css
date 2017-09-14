@@ -96,3 +96,8 @@ alert {
 #knappochhero, #sidebarzItem, #sidebarzItemDone {
     cursor: pointer;
 }
+
+.progress {
+    background-color: white;
+    margin-top: 100px;
+}

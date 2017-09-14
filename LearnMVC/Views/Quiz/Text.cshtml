@@ -10,6 +10,9 @@
  
         <button onclick="Plus(@Model.QuizUnitId)" class="btn btn-default">Next!</button>
 
+        @Html.Partial("CategoryProgress", Model.CategoryProgress)
+
+
         @*<a asp-controller="Quiz" asp-action="Question">Nästa ></a>*@
     </div>
     <!--HERE IS SIDEBOX-->

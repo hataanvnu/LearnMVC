@@ -20,5 +20,7 @@ namespace LearnMVC.Models.View_Models
         public bool FinishedACategory { get; set; }
 
         public int CategoryId { get; set; }
+
+        public double CategoryProgress { get; set; }
     }
 }

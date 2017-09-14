@@ -215,6 +215,27 @@ namespace LearnMVC.Models.Entities
                 }
             }
 
+            var categoryId = QuizUnit
+                .SingleOrDefault(q => q.QuizUnitId == QuizUnitId)
+                .CategoryId;
+
+            //double numberOfQuestionsInCategory = Question
+            //    .Where(q => q.QuizUnit.CategoryId == categoryId)
+            //    .Include(q => q.QuizUnit)
+            //    .Count();
+
+            //double doneQuestionsInCategory = Progress
+            //    //.Where(p => p.Question.QuizUnitId == QuizUnitId)
+            //    .Where(p => p.Question.QuizUnit.CategoryId == categoryId)
+            //    .Where(p => p.MemberId == memberId)
+            //    .Include(p => p.Question)
+            //    //.ThenInclude(q => q.QuizUnit)
+            //    .Count();
+
+            //quizQuestionVM.CategoryProgress = Math.Round(100.0 * doneQuestionsInCategory / numberOfQuestionsInCategory);
+
+            quizQuestionVM.CategoryProgress = GetCategoryProgress((int)categoryId, memberId);
+
             return quizQuestionVM;
         }
 
@@ -255,7 +276,7 @@ namespace LearnMVC.Models.Entities
                 };
             }
 
-            return new QuizTextVM
+            QuizTextVM model = new QuizTextVM
             {
                 CategoryName = nextQuizUnit.Category.Title,
                 TextContent = nextQuizUnit.InfoTextContent,
@@ -263,7 +284,30 @@ namespace LearnMVC.Models.Entities
                 QuizUnitId = nextQuizUnit.QuizUnitId,
                 FinishedACategory = false,
                 CategoryId = (int)nextQuizUnit.CategoryId,
+
             };
+
+            model.CategoryProgress = GetCategoryProgress(categoryId, memberId);
+
+            return model;
+        }
+
+        private double GetCategoryProgress(int categoryId, string memberId)
+        {
+            double numberOfQuestionsInCategory = Question
+                            .Where(q => q.QuizUnit.CategoryId == categoryId)
+                            .Include(q => q.QuizUnit)
+                            .Count();
+
+            double doneQuestionsInCategory = Progress
+                //.Where(p => p.Question.QuizUnitId == QuizUnitId)
+                .Where(p => p.Question.QuizUnit.CategoryId == categoryId)
+                .Where(p => p.MemberId == memberId)
+                .Include(p => p.Question)
+                //.ThenInclude(q => q.QuizUnit)
+                .Count();
+
+            return Math.Round(100.0 * doneQuestionsInCategory / numberOfQuestionsInCategory);
         }
 
         private QuizUnit GetQuizUnit(int categoryId, string memberId)

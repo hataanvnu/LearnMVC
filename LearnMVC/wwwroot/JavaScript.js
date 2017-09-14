@@ -76,6 +76,7 @@ function LoadChart(doneQuestions, allQuestions) {
     //Chart JS goes from here ---> SO SUPERAWESOME
     var canvas = document.getElementById("myChart");
     var ctx = canvas.getContext('2d');
+    
 
     // Global Options:
     Chart.defaults.global.defaultFontColor = 'black';
@@ -87,7 +88,7 @@ function LoadChart(doneQuestions, allQuestions) {
             {
                 fill: true,
                 backgroundColor: [
-                    'pink',
+                    '#ff70de',
                     'white'],
                 data: [doneQuestions, allQuestions], // INSERT PROGRESS HERE
                 // Notice the borderColor 

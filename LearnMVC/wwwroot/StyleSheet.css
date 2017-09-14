@@ -63,7 +63,7 @@ h3, h2, h1 {
 }
 #sidebarzItem, #sidebarzItemDone {
     margin: 6px;
-    padding: 3px;
+    padding: 6px;
     opacity: 0.8;
     color: black;
     border-radius:5px;
@@ -89,9 +89,8 @@ alert {
 #knappochhero {
     margin: 3px;
     padding: 7px;
-    background-color: #ff70de;
+    padding-bottom: 15px;
     opacity: 0.7;
-    border-radius: 3px;
 }
 
 #knappochhero, #sidebarzItem, #sidebarzItemDone {

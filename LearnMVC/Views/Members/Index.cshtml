@@ -1,4 +1,5 @@
 ﻿@model MembersIndexVM
+
 <div class="container-fluid">
     <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
         <h3>Welcome @Model.UserName</h3>
@@ -8,7 +9,7 @@
         <canvas id="myChart"></canvas>
 
         @if (Model.HasPreviousProgress)
-        {
+            {
             <div id="progressContent">
                 <br />
                 <h3>Latest progress:</h3>
@@ -35,13 +36,13 @@
 
     </div>
     <!--HERE IS SIDEBOX-->
-<div class="col-md-3" id="sidebox">
-    <div class="row" id="logobox" style="padding-top:10px">
-        <img src="~/Images/LearnMVClogo.png" width="170" style="float:left" />
+    <div class="col-md-3" id="sidebox">
+        <div class="row" id="logobox" style="padding-top:10px">
+            <img src="~/Images/LearnMVClogo.png" width="170" style="float:left" />
+        </div>
+        <div>
+            @Html.Partial("_Sidebar", Model.SidebarVMList)
+        </div>
     </div>
-    <div>
-        @Html.Partial("_Sidebar", Model.SidebarVMList)
-    </div>
-</div>
 </div> <!--END ROW-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.min.js"></script>

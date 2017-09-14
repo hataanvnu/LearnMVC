@@ -58,7 +58,20 @@ function Yay() {
     alert("CORRECT!");
 }
 
+
 $(document).ready(function () {
+    $.ajax({
+        url: "/Members/GetProgress",
+        type: "GET",
+        success: function (result) {
+            LoadChart(result.doneQuestions, result.totalAmountOfQuestion);
+        }
+    });
+
+
+});
+
+function LoadChart(doneQuestions, allQuestions) {
 
     //Chart JS goes from here ---> SO SUPERAWESOME
     var canvas = document.getElementById("myChart");
@@ -76,7 +89,7 @@ $(document).ready(function () {
                 backgroundColor: [
                     'pink',
                     'white'],
-                data: [40, 60], // INSERT PROGRESS HERE
+                data: [doneQuestions, allQuestions], // INSERT PROGRESS HERE
                 // Notice the borderColor 
                 borderColor: ['black', 'black'],
                 borderWidth: [1, 1]
@@ -103,4 +116,4 @@ $(document).ready(function () {
         options: options
     });
 
-}); 
+} 

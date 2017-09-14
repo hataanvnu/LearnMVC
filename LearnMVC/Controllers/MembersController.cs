@@ -47,7 +47,6 @@ namespace LearnMVC.Controllers
                 return RedirectToAction(nameof(AdminController.Index), "Admin");
             }
 
-
             var membersIndexVM = context.GetMembersIndexVMById(memberID, User.Identity.Name);
 
             membersIndexVM.SidebarVMList = context.GetSidebarVMList(memberID);
@@ -59,7 +58,15 @@ namespace LearnMVC.Controllers
         [AllowAnonymous]
         public IActionResult Register()
         {
-            return View();
+            MembersRegisterVM model = new MembersRegisterVM
+            {
+                HeadersVM = new NoSidebarHeadersVM
+                {
+                    BigHeader = "Learn MVC!",
+                    SmallHeader = "First, register:",
+                }
+            };
+            return View(model);
         }
 
         [HttpPost]
@@ -101,7 +108,15 @@ namespace LearnMVC.Controllers
         [AllowAnonymous]
         public IActionResult Login()
         {
-            return View();
+            MembersLoginVM model = new MembersLoginVM
+            {
+                HeadersVM = new NoSidebarHeadersVM
+                {
+                    BigHeader = "Learn MVC!",
+                    SmallHeader = "Nice to see you again!",
+                }
+            };
+            return View(model);
         }
 
         [HttpPost]
@@ -147,6 +162,13 @@ namespace LearnMVC.Controllers
                 context.ResetAllProgressForMember(userManager.GetUserId(User));
                 return RedirectToAction(nameof(Index));
             }
+        }
+
+        public IActionResult GetProgress()
+        {
+            ProgressVM model = context.GetProgressVM(userManager.GetUserId(User));
+
+            return Json(model);
         }
     }
 }

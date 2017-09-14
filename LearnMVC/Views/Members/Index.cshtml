@@ -2,37 +2,40 @@
 
 <div class="container-fluid">
     <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
-        <h3>Welcome @Model.UserName</h3>
+        <h2>Welcome, @Model.UserName !</h2>
         <br />
 
-        <!--CHART.JS KOMMER HÄR-->
-        <div style="width: 600px;">
-            <canvas id="myChart"></canvas>
-        </div>
-        @if (Model.HasPreviousProgress)
+        <div class="row" style="padding-top:100px;padding:10px">
+
+            @if (Model.HasPreviousProgress)
             {
-            <div id="progressContent">
-                <br />
-                <h3>Latest progress:</h3>
-                <br />
-                <p><b>Category:</b> @Model.CategoryName</p>
+                <div id="progressContent" class="col-md-4">
+                    <br />
+                    <h3>Latest progress:</h3>
+                    <br />
+                    <p><b>Category:</b> @Model.CategoryName</p>
 
-                <p><b>Quiz-Unit:</b> @Model.QuizUnitName</p>
+                    <p><b>Quiz-Unit:</b> @Model.QuizUnitName</p>
 
-                <p><b>Question:</b> @Model.QuestionText</p>
+                    <p><b>Question:</b> @Model.QuestionText</p>
 
-                <button onclick="Continue(@Model.QuestionID)" class="btn btn-default">Continue</button>
-                <button onclick="ResetProgress()" class="btn btn-default">Reset Progress</button>
+                    <button onclick="Continue(@Model.QuestionID)" class="btn btn-default">Continue</button>
+                    <button onclick="ResetProgress()" class="btn btn-default">Reset Progress</button>
+                </div>
+            }
+            else
+            {
+                <div class="col-md-4">
+                    Oooh! Ah Newbie! <br />
+                    Click on one of the categories in the menu to start your journey towards becoming an MVC Godess!
+                </div>
+            }
+
+            <!--CHART.JS KOMMER HÄR-->
+            <div style="width: 700px;" class="col-md-8">
+                <canvas id="myChart"></canvas>
             </div>
-        }
-        else
-        {
-            <div>
-                Oooh! Ah Newbie! <br />
-                Click on one of the categories in the menu to start your journey towards becoming an MVC Godess!
-            </div>
-        }
-
+        </div>
         <br /> <br />
 
     </div>

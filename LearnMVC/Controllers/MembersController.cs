@@ -124,7 +124,7 @@ namespace LearnMVC.Controllers
 
             // Todo - Kolla om den som loggade in var en admin och skicka i så fall till /Admin/Index istället
             // Sker i index istället?
-            
+
 
             return RedirectToAction(nameof(Index));
         }
@@ -140,7 +140,11 @@ namespace LearnMVC.Controllers
         {
             if (!isValidated)
             {
-                return View();
+                ResetProgressVM model = new ResetProgressVM
+                {
+                    SidebarVMList = context.GetSidebarVMList(userManager.GetUserId(User)),
+                };
+                return View(model);
             }
             else
             {

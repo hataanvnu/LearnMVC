@@ -38,6 +38,11 @@ namespace LearnMVC.Controllers
         public IActionResult Text(int id /*CategoryId*/)
         {
             QuizTextVM qt = context.GetQuizTextVMById(id, userManager.GetUserId(User));
+            if (qt == null)
+            {
+                // Det finns inga fler kategorier (eller så har något gått fel. heh.)
+                return RedirectToAction(nameof(Finished));
+            }
             qt.SidebarArray = context.GetSidebarVMList(userManager.GetUserId(User));
             return View(qt);
         }

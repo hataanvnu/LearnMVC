@@ -179,6 +179,8 @@ namespace LearnMVC.Models.Entities
                     QuestionText = firstQuestionOfCurrentQuizUnit.QuestionText,
                     Answers = firstQuestionOfCurrentQuizUnit.Answer.ToArray(),
                     QuestionId = firstQuestionOfCurrentQuizUnit.QuestionId,
+                    QuizUnitHeader = QuizUnit.SingleOrDefault(q => q.QuizUnitId == QuizUnitId).InfoTextHeader,
+                    CategoryTitle = QuizUnit.Include(q => q.Category).SingleOrDefault(q => q.QuizUnitId == QuizUnitId).Category.Title,
                 };
             }
             else
@@ -206,6 +208,9 @@ namespace LearnMVC.Models.Entities
                         QuestionText = porque.QuestionText,
                         Answers = porque.Answer.ToArray(),
                         QuestionId = porque.QuestionId,
+                        QuizUnitHeader = QuizUnit.SingleOrDefault(q => q.QuizUnitId == QuizUnitId).InfoTextHeader,
+                        CategoryTitle = QuizUnit.Include(q => q.Category).SingleOrDefault(q => q.QuizUnitId == QuizUnitId).Category.Title,
+
                     };
                 }
             }
@@ -234,6 +239,11 @@ namespace LearnMVC.Models.Entities
         public QuizTextVM GetQuizTextVMById(int categoryId, string memberId)
         {
             var nextQuizUnit = GetQuizUnit(categoryId, memberId);
+
+            if (nextQuizUnit == null)
+            {
+                return null;
+            }
 
             return new QuizTextVM
             {
@@ -410,9 +420,16 @@ namespace LearnMVC.Models.Entities
             Question q = new Question
             {
                 QuestionText = model.QuestionText,
-                Order = Question.Max(c => c.Order) + 1,
                 QuizUnitId = model.SelectedQuizUnitId,
             };
+            try
+            {
+                q.Order = Question.Max(c => c.Order) + 1;
+            }
+            catch (Exception)
+            {
+                q.Order = 1;
+            }
             Question.Add(q);
 
             for (int i = 0; i < model.Answers.Length; i++)
@@ -602,7 +619,7 @@ namespace LearnMVC.Models.Entities
             {
                 Answer.Remove(Answer.Single(a => a.AnswerId == item.AnswerId));
             }
-            
+
 
             for (int i = 0; i < newModel.Answers.Length; i++)
             {

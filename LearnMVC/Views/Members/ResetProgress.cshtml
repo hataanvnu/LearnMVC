@@ -1,10 +1,10 @@
-﻿@model MembersIndexVM
+﻿@model ResetProgressVM
 <div class="container-fluid">
     <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
 
         <p>Do you want to reset all of your progress? This cannot be undone.</p>
 
-        <button onclick="ResetProgressValidated(@Model)" class="btn btn-default">Yes!</button>
+        <button onclick="ResetProgressValidated()" class="btn btn-default">Yes!</button>
 
         <button onclick="GoToIndex()" class="btn btn-default">No</button>
 
@@ -16,7 +16,7 @@
         <img src="~/Images/LearnMVClogo.png" width="170" style="float:left" />
     </div>
     <div>
-        @*@Html.Partial("_Sidebar", Model.SidebarVMList)*@
+        @Html.Partial("_Sidebar", Model.SidebarVMList)
     </div>
 </div> <!--END ROW-->
 </div>

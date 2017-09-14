@@ -1,25 +1,10 @@
-﻿@model ResetCategoryVM
+﻿@{ 
+    Layout = "_NoSidebar_Layout";
+}
+@model ResetCategoryVM
 
-<div class="container-fluid">
-    <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
+<h4>Do you want to reset your progress for this category and play it again?</h4>
 
-        <p>Do you want to reset your progress for this category and play it again?</p>
+<button onclick="ResetCategoryValidated(@Model.CategoryId)" class="btn btn-default">Yes!</button>
 
-        <button onclick="ResetCategoryValidated(@Model.CategoryId)" class="btn btn-default">Yes!</button>
-
-        <button onclick="GoToIndex()" class="btn btn-default">No</button>
-
-
-    </div>
-
-<!--HERE IS SIDEBOX-->
-<div class="col-md-3" id="sidebox">
-    <div class="row" id="logobox" style="padding-top:10px">
-        <img src="~/Images/LearnMVClogo.png" width="170" style="float:left" />
-    </div>
-    <div>
-        @Html.Partial("_Sidebar", Model.SidebarList)
-    </div>
-</div>
-@*</div> <!--END ROW-->*@
-</div>
+<button onclick="GoToIndex()" class="btn btn-default">No</button>

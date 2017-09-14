@@ -58,6 +58,10 @@ function Yay() {
     alert("CORRECT!");
 }
 
+function Next(id) {
+    document.location.href = "/Quiz/Text/" + id;
+}
+
 
 $(document).ready(function () {
     $.ajax({

@@ -1,22 +1,13 @@
-﻿@model ResetProgressVM
-<div class="container-fluid">
-    <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
+﻿@{
+    Layout = "_NoSidebar_Layout";
+}
 
-        <p>Do you want to reset all of your progress? This cannot be undone.</p>
+@model ResetProgressVM
 
-        <button onclick="ResetProgressValidated()" class="btn btn-default">Yes!</button>
 
-        <button onclick="GoToIndex()" class="btn btn-default">No</button>
+<h4>Do you want to reset all of your progress? This cannot be undone.</h4>
 
-    </div>
+<button onclick="ResetProgressValidated()" class="btn btn-default">Yes!</button>
 
-<!--HERE IS SIDEBOX-->
-<div class="col-md-3" id="sidebox">
-    <div class="row" id="logobox" style="padding-top:10px">
-        <img src="~/Images/LearnMVClogo.png" width="170" style="float:left" />
-    </div>
-    <div>
-        @Html.Partial("_Sidebar", Model.SidebarVMList)
-    </div>
-</div> <!--END ROW-->
-</div>
+<button onclick="GoToIndex()" class="btn btn-default">No</button>
+

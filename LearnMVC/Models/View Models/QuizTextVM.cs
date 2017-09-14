@@ -16,5 +16,9 @@ namespace LearnMVC.Models.View_Models
         public SidebarVM[] SidebarArray { get; set; }
 
         public int QuizUnitId { get; set; }
+
+        public bool FinishedACategory { get; set; }
+
+        public int CategoryId { get; set; }
     }
 }

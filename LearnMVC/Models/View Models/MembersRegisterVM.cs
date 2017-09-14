@@ -20,5 +20,7 @@ namespace LearnMVC.Models.View_Models
         [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
+
+        public NoSidebarHeadersVM HeadersVM { get; set; }
     }
 }

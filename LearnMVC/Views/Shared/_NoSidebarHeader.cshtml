@@ -1,7 +1,4 @@
-﻿@{
-    Layout = "_NoSidebar_Layout";
-}
-
+﻿@model NoSidebarHeadersVM
 
 <!--HEADER HAPPENS HERE-->
 <div class="row" id="logoandtext">
@@ -9,8 +6,7 @@
         <img src="~/Images/LearnMVCIcon.png" height="80" style="float:left;padding-left:1%; padding-right:2%" />
     </div>
     <div class="col-md-8">
-        <h3>Houston, we have a serveside problem!</h3>
-        <h4>Sorry for the inconvenience. We'll try to fix it.</h4>
-        <button class="btn btn-default" onclick="GoToIndex()">Back to index!</button>
+        <h3>@Model.BigHeader</h3>
+        <h4>@Model.SmallHeader</h4>
     </div>
 </div>

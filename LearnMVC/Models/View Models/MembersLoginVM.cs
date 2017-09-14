@@ -15,5 +15,7 @@ namespace LearnMVC.Models.View_Models
         [DataType(DataType.Password)]
         [Required(ErrorMessage = "You must provide a password.")]
         public string Password { get; set; }
+
+        public NoSidebarHeadersVM HeadersVM { get; set; }
     }
 }

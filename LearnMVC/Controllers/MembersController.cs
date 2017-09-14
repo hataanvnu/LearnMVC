@@ -59,7 +59,15 @@ namespace LearnMVC.Controllers
         [AllowAnonymous]
         public IActionResult Register()
         {
-            return View();
+            MembersRegisterVM model = new MembersRegisterVM
+            {
+                HeadersVM = new NoSidebarHeadersVM
+                {
+                    BigHeader = "Learn MVC!",
+                    SmallHeader = "First, register:",
+                }
+            };
+            return View(model);
         }
 
         [HttpPost]
@@ -101,7 +109,15 @@ namespace LearnMVC.Controllers
         [AllowAnonymous]
         public IActionResult Login()
         {
-            return View();
+            MembersLoginVM model = new MembersLoginVM
+            {
+                HeadersVM = new NoSidebarHeadersVM
+                {
+                    BigHeader = "Learn MVC!",
+                    SmallHeader = "Nice to see you again!",
+                }
+            };
+            return View(model);
         }
 
         [HttpPost]

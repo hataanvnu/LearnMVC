@@ -41,7 +41,7 @@ namespace LearnMVC.Controllers
             if (qt == null)
             {
                 // Det finns inga fler kategorier (eller så har något gått fel. heh.)
-                return RedirectToAction(nameof(Finished));
+                return RedirectToAction(nameof(SuperFinished));
             }
             qt.SidebarArray = context.GetSidebarVMList(userManager.GetUserId(User));
             return View(qt);
@@ -99,6 +99,16 @@ namespace LearnMVC.Controllers
         }
 
         public IActionResult Finished()
+        {
+            QuizFinishedVM model = new QuizFinishedVM
+            {
+                SidebarArray = context.GetSidebarVMList(userManager.GetUserId(User)),
+            };
+
+            return View(model);
+        }
+
+        public IActionResult SuperFinished()
         {
             QuizFinishedVM model = new QuizFinishedVM
             {

@@ -10,7 +10,6 @@
             @if (Model.HasPreviousProgress)
             {
                 <div id="progressContent" class="col-md-4">
-                    <br />
                     <h3>Latest progress:</h3>
                     <br />
                     <p><b>Category:</b> @Model.CategoryName</p>
@@ -32,7 +31,7 @@
             }
 
             <!--CHART.JS KOMMER HÄR-->
-            <div style="width: 700px;" class="col-md-8">
+            <div style="width: 600px;" class="col-md-8">
                 <canvas id="myChart"></canvas>
             </div>
         </div>

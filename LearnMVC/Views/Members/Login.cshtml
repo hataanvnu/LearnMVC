@@ -2,22 +2,27 @@
     Layout = "_NoSidebar_Layout";
 }
 @model MembersLoginVM
-
 <!--HEADER HAPPENS HERE-->
 @Html.Partial("_NoSidebarHeader", Model.HeadersVM)
 
 <!--FORM HAPPENS HERE-->
 <br />
-
 <form asp-controller="Members" asp-action="Login">
-    <label asp-for="UserName"></label>
-    <input asp-for="UserName" />
-    <span asp-validation-for="UserName"></span>
-    <br />
-    <br />
+    <div class="row">
+        <div class="col-md-4">
+            <label asp-for="UserName"></label>
+            <br /><br />
+            <label asp-for="Password"></label>
 
-    <label asp-for="Password"></label>
-    <input asp-for="Password" />
+        </div>
+        <div class="col-md-4">
+            <input asp-for="UserName" />
+            <br /><br />
+            <input asp-for="Password" />
+
+        </div>
+    </div>
+    <span asp-validation-for="UserName"></span>
     <span asp-validation-for="Password"></span>
     <br />
     <br />

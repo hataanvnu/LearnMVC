@@ -2,16 +2,23 @@
 
 <div class="container-fluid">
     <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
-        <h2>Congrats,</h2>
-        <h3>NOW YOU CAN MVC!</h3>
-        <img src="http://www.animatedimages.org/data/media/56/animated-computer-image-0007.gif" border="0" alt="animated-computer-image-0007" width="700"/>
 
+        NOW YOU CAN MVC
+        <img src="http://www.animatedimages.org/data/media/56/animated-computer-image-0007.gif" border="0" alt="animated-computer-image-0007" />
+
+        <button class="btn btn-default" onclick="next()">Next Category!</button>
 
     </div>
     <!--HERE IS SIDEBOX-->
     <div class="col-md-3" id="sidebox">
         <div class="row" id="logobox" style="padding-top:10px">
             <img src="~/Images/LearnMVClogo.png" width="170" style="float:left" />
+        </div>
+        <!--GO TO MY PROFIL-->
+        <div class="row" id="sidebarzItem" style="padding:5px; background-color:#ff28ce" onclick="GoToIndex()">
+            <h4>
+                My profile
+            </h4>
         </div>
         <div>
             @Html.Partial("_Sidebar", Model.SidebarArray)

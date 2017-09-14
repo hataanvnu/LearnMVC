@@ -3,12 +3,14 @@
 <div class="container-fluid">
     <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
         <h2>Welcome, @Model.UserName !</h2>
+        <br />
 
-        <div class="row" style="padding-top:50px">
+        <div class="row" style="padding-top:100px;padding:10px">
 
             @if (Model.HasPreviousProgress)
             {
                 <div id="progressContent" class="col-md-4">
+                    <br />
                     <h3>Latest progress:</h3>
                     <br />
                     <p><b>Category:</b> @Model.CategoryName</p>
@@ -24,13 +26,13 @@
             else
             {
                 <div class="col-md-4">
-                    <p>Oooh! Ah Newbie! <br />
-                    Click on one of the categories in the menu to start your journey towards becoming an MVC Godess!</p>
+                    Oooh! Ah Newbie! <br />
+                    Click on one of the categories in the menu to start your journey towards becoming an MVC Godess!
                 </div>
             }
 
             <!--CHART.JS KOMMER HÄR-->
-            <div style="width: 600px;" class="col-md-8">
+            <div style="width: 700px;" class="col-md-8">
                 <canvas id="myChart"></canvas>
             </div>
         </div>

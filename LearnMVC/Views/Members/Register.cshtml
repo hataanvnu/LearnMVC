@@ -3,27 +3,36 @@
 }
 
 @model MembersRegisterVM
-
 <!--HEADER HAPPENS HERE-->
 @Html.Partial("_NoSidebarHeader", Model.HeadersVM)
 
 <!--FORM HAPPENS HERE-->
 <br />
-<form asp-controller="Members" asp-action="Register">
-    <label asp-for="UserName"></label>
-    <input asp-for="UserName" />
-    <span asp-validation-for="UserName"></span>
-    <br />
-    <br />
-    <label asp-for="Email"></label>
-    <input asp-for="Email" />
-    <span asp-validation-for="Email"></span>
-    <br />
-    <br />
-    <label asp-for="Password"></label>
-    <input asp-for="Password" />
-    <span asp-validation-for="Password"></span>
-    <br />
-    <br />
-    <button type="submit" class="btn btn-default">Go!</button>
+<form asp-controller="Members" asp-action="Register" style="text-align:center">
+
+    <div class="row">
+        <div class="col-md-4">
+            <label asp-for="UserName"></label><br />
+            <br />
+            <label asp-for="Email"></label>
+            <br />
+            <br />
+            <label asp-for="Password"></label>
+            <br /><br />
+            <button type="submit" class="btn btn-default">Go!</button>
+        </div>
+        <div class="col-md-8">
+            <input asp-for="UserName" />
+            <span asp-validation-for="UserName"></span><br />
+            <br />
+            <input asp-for="Email" />
+            <span asp-validation-for="Email"></span><br /><br />
+            <input asp-for="Password" />
+            <span asp-validation-for="Password"></span>
+            <br />
+            <br />
+        </div>
+
+    </div>
+
 </form>

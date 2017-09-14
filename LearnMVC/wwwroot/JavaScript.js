@@ -77,6 +77,7 @@ function LoadChart(doneQuestions, allQuestions) {
     var canvas = document.getElementById("myChart");
     var ctx = canvas.getContext('2d');
 
+
     // Global Options:
     Chart.defaults.global.defaultFontColor = 'black';
     Chart.defaults.global.defaultFontSize = 16;

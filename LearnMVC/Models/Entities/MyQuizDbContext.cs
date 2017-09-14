@@ -245,12 +245,24 @@ namespace LearnMVC.Models.Entities
                 return null;
             }
 
+            if (nextQuizUnit.CategoryId != categoryId)
+            {
+                // Vi har gått till en ny kategori
+                return new QuizTextVM
+                {
+                    FinishedACategory = true,
+                    CategoryId = (int)nextQuizUnit.CategoryId,
+                };
+            }
+
             return new QuizTextVM
             {
                 CategoryName = nextQuizUnit.Category.Title,
                 TextContent = nextQuizUnit.InfoTextContent,
                 TextHeader = nextQuizUnit.InfoTextHeader,
                 QuizUnitId = nextQuizUnit.QuizUnitId,
+                FinishedACategory = false,
+                CategoryId = (int)nextQuizUnit.CategoryId,
             };
         }
 

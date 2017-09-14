@@ -43,6 +43,10 @@ namespace LearnMVC.Controllers
                 // Det finns inga fler kategorier (eller så har något gått fel. heh.)
                 return RedirectToAction(nameof(SuperFinished));
             }
+            else if (qt.FinishedACategory)
+            {
+                return RedirectToAction(nameof(Finished), new { id = qt.CategoryId });
+            }
             qt.SidebarArray = context.GetSidebarVMList(userManager.GetUserId(User));
             return View(qt);
         }
@@ -98,11 +102,12 @@ namespace LearnMVC.Controllers
             }
         }
 
-        public IActionResult Finished()
+        public IActionResult Finished(int id)
         {
             QuizFinishedVM model = new QuizFinishedVM
             {
                 SidebarArray = context.GetSidebarVMList(userManager.GetUserId(User)),
+                CategoryId = id,
             };
 
             return View(model);

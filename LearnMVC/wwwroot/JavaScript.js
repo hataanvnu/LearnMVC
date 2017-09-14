@@ -58,3 +58,49 @@ function Yay() {
     alert("CORRECT!");
 }
 
+$(document).ready(function () {
+
+    //Chart JS goes from here ---> SO SUPERAWESOME
+    var canvas = document.getElementById("myChart");
+    var ctx = canvas.getContext('2d');
+
+    // Global Options:
+    Chart.defaults.global.defaultFontColor = 'black';
+    Chart.defaults.global.defaultFontSize = 16;
+
+    var data = {
+        labels: ["Done ", "To Do"],
+        datasets: [
+            {
+                fill: true,
+                backgroundColor: [
+                    'pink',
+                    'white'],
+                data: [40, 60], // INSERT PROGRESS HERE
+                // Notice the borderColor 
+                borderColor: ['black', 'black'],
+                borderWidth: [2, 2]
+            }
+        ]
+    };
+
+    // Notice the rotation from the documentation.
+
+    var options = {
+        title: {
+            display: true,
+            text: 'My progress?',
+            position: 'top'
+        },
+        rotation: -0.7 * Math.PI
+    };
+
+
+    // Chart declaration:
+    var myBarChart = new Chart(ctx, {
+        type: 'pie',
+        data: data,
+        options: options
+    });
+
+}); 

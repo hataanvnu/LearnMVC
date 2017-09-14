@@ -4,11 +4,11 @@
     <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
         <h3>Welcome @Model.UserName</h3>
         <br />
-        <div width="200">
-            <!--CHART.JS KOMMER HÄR-->
+
+        <!--CHART.JS KOMMER HÄR-->
+        <div style="width: 600px;">
             <canvas id="myChart"></canvas>
         </div>
-
         @if (Model.HasPreviousProgress)
             {
             <div id="progressContent">

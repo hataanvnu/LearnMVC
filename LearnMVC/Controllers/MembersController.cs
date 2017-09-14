@@ -47,7 +47,6 @@ namespace LearnMVC.Controllers
                 return RedirectToAction(nameof(AdminController.Index), "Admin");
             }
 
-
             var membersIndexVM = context.GetMembersIndexVMById(memberID, User.Identity.Name);
 
             membersIndexVM.SidebarVMList = context.GetSidebarVMList(memberID);
@@ -163,6 +162,13 @@ namespace LearnMVC.Controllers
                 context.ResetAllProgressForMember(userManager.GetUserId(User));
                 return RedirectToAction(nameof(Index));
             }
+        }
+
+        public IActionResult GetProgress()
+        {
+            ProgressVM model = context.GetProgressVM(userManager.GetUserId(User));
+
+            return Json(model);
         }
     }
 }

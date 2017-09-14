@@ -631,5 +631,20 @@ namespace LearnMVC.Models.Entities
 
             SaveChanges();
         }
+
+
+        public ProgressVM GetProgressVM(string memberId)
+        {
+            ProgressVM model = new ProgressVM
+            {
+                DoneQuestions = Progress
+                .Where(p => p.MemberId == memberId)
+                .Count(),
+
+                TotalAmountOfQuestion = Question.Count(),
+            };
+
+            return model;
+        }
     }
 }

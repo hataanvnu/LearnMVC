@@ -1,76 +1,45 @@
-﻿@model QuizOverviewVM
-<div class="container-fluid">
-    <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
-        <h3>Välkommen Admin!</h3>
-        <br />
+﻿@{
+    Layout = "_Admin_Layout";
+}
 
-        <div>
-            <h3>Stats:</h3>
-            <p>
-                Number of categories: @Model.NumberOfCategories
-                <br />Number of quiz units: @Model.NumberOfQuizUnits
-                <br />Number of questions: @Model.NumberOfQuestions
-            </p>
-        </div>
+@model QuizOverviewVM
 
 
+<h3>Välkommen Admin!</h3>
+<br />
 
-        <h3>Overview:</h3>
-        <ul>
-            @foreach (var category in Model.Categories)
+<div>
+    <h3>Stats:</h3>
+    <p>
+        Number of categories: @Model.NumberOfCategories
+        <br />Number of quiz units: @Model.NumberOfQuizUnits
+        <br />Number of questions: @Model.NumberOfQuestions
+    </p>
+</div>
+
+
+
+<h3>Overview:</h3>
+<ul>
+    @foreach (var category in Model.Categories)
             {
-                <li>
-                    <a asp-controller="Admin" asp-action="EditCategory" asp-route-id="@category.CategoryId">@category.Title</a>
-                    <ul>
-                        @foreach (var quizUnit in category.QuizUnit)
-                        {
-                            <li>
-                                <a asp-controller="Admin" asp-action="EditQuizUnit" asp-route-id="@quizUnit.QuizUnitId">@quizUnit.InfoTextHeader</a>
-                                <ul>
-                                    @foreach (var question in quizUnit.Question)
-                                    {
-                                        <li><a asp-controller="Admin" asp-action="EditQuestion" asp-route-id="@question.QuestionId">@question.QuestionText</a></li>
-                                    }
-                                </ul>
-                            </li>
-                        }
-                    </ul>
-                </li>
-            }
-        </ul>
+        <li>
+            <a asp-controller="Admin" asp-action="EditCategory" asp-route-id="@category.CategoryId">@category.Title</a>
+            <ul>
+                @foreach (var quizUnit in category.QuizUnit)
+                {
+                    <li>
+                        <a asp-controller="Admin" asp-action="EditQuizUnit" asp-route-id="@quizUnit.QuizUnitId">@quizUnit.InfoTextHeader</a>
+                        <ul>
+                            @foreach (var question in quizUnit.Question)
+                            {
+                                <li><a asp-controller="Admin" asp-action="EditQuestion" asp-route-id="@question.QuestionId">@question.QuestionText</a></li>
+                            }
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+</ul>
 
-    </div>
-    <!--HERE IS SIDEBOX-->
-    <div class="col-md-3" id="sidebox">
-        <div class="row" id="logobox" style="padding-top:10px">
-            <img src="~/Images/LearnMVClogo.png" width="170" style="float:left" />
-        </div>
-        <!--GO TO RESULTS-->
-        <div class="row" id="sidebarzItemDone" style="padding:5px" onclick=GoToResult()>
-            <h4>
-                Das Resultat
-            </h4>
-        </div>
-        <!--GO TO Create New Stuff-->
-        <div class="row" id="sidebarzItemDone" style="padding:5px" onclick=GoToCreateNew(1)>
-            <h4>
-                Create Category
-            </h4>
-        </div>
-        <!--GO TO Create QuizUnit-->
-        <div class="row" id="sidebarzItemDone" style="padding:5px" onclick=GoToCreateNew(2)>
-            <h4>
-                Create Quizunit!
-            </h4>
-        </div>
-        <!--GO TO Create Question-->
-        <div class="row" id="sidebarzItemDone" style="padding:5px" onclick=GoToCreateNew(3)>
-            <h4>
-                Create Question!
-            </h4>
-        </div>
-        <div>
-            @*@Html.Partial("_Sidebar", Model.SidebarVMList)*@
-        </div>
-    </div> <!--END SIDEBAR-->
-</div> <!--END ROW-->

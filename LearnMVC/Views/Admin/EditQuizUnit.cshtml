@@ -1,6 +1,8 @@
-﻿@model EditQuizUnitVM
+﻿@{
+    Layout = "_Admin_Layout";
+}
+@model EditQuizUnitVM
 
-<div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
     <h3>Redigera quizet, Admin!</h3>
     <br />
     UNICORNS!
@@ -22,38 +24,3 @@
 
         <button type="submit">Summon Unicorns!</button>
     </form>
-
-</div>
-<!--HERE IS SIDEBOX-->
-<div class="col-md-3" id="sidebox">
-    <div class="row" id="logobox" style="padding-top:10px">
-        <img src="~/Images/LearnMVClogo.png" width="170" style="float:left" />
-    </div>
-    <!--GO TO RESULTS-->
-    <div class="row" id="sidebarzItemDone" style="padding:5px" onclick=GoToResult()>
-        <h4>
-            Das Resultat
-        </h4>
-    </div>
-    <!--GO TO Create New Stuff-->
-    <div class="row" id="sidebarzItemDone" style="padding:5px" onclick=GoToCreateNew(1)>
-        <h4>
-            Create Category
-        </h4>
-    </div>
-    <!--GO TO Create QuizUnit-->
-    <div class="row" id="sidebarzItemDone" style="padding:5px" onclick=GoToCreateNew(2)>
-        <h4>
-            Create Quizunit!
-        </h4>
-    </div>
-    <!--GO TO Create Question-->
-    <div class="row" id="sidebarzItemDone" style="padding:5px" onclick=GoToCreateNew(3)>
-        <h4>
-            Create Question!
-        </h4>
-    </div>
-    <div>
-        @*@Html.Partial("_Sidebar", Model.SidebarVMList)*@
-    </div>
-</div> <!--END SIDEBAR-->

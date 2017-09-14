@@ -1,62 +1,27 @@
-﻿@model AddQuizUnitVM
+﻿@{
+    Layout = "_Admin_Layout";
+}
+@model AddQuizUnitVM
 
 
-<div class="container-fluid">
-    <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
-        <h3>Gör ett nytt quiz, Admin!</h3>
-        <br />
+<h3>Gör ett nytt quiz, Admin!</h3>
+<br />
         UNICORNS!
-        <h2>Add Quiz Unit</h2>
-        <form asp-controller="Admin" asp-action="AddQuizUnit">
-            <label asp-for="@Model.QuizUnitHeader"></label>
-            <input asp-for="@Model.QuizUnitHeader" />
-            <span asp-validation-for="@Model.QuizUnitHeader"></span>
-            <br />
-            <br />
-            <label asp-for="@Model.QuizUnitContent"></label>
-            <textarea class="bigTextBox" asp-for="@Model.QuizUnitContent" ></textarea>
-            <span asp-validation-for="@Model.QuizUnitContent"></span>
-            <br />
-            <br />
-            <label asp-for="@Model.SelectedCategoryId"></label>
-            <select asp-for="@Model.SelectedCategoryId" asp-items="@Model.Categories"></select>
-            <span asp-validation-for="SelectedCategoryId"></span>
+<h2>Add Quiz Unit</h2>
+<form asp-controller="Admin" asp-action="AddQuizUnit">
+    <label asp-for="@Model.QuizUnitHeader"></label>
+    <input asp-for="@Model.QuizUnitHeader" />
+    <span asp-validation-for="@Model.QuizUnitHeader"></span>
+    <br />
+    <br />
+    <label asp-for="@Model.QuizUnitContent"></label>
+    <textarea class="bigTextBox" asp-for="@Model.QuizUnitContent"></textarea>
+    <span asp-validation-for="@Model.QuizUnitContent"></span>
+    <br />
+    <br />
+    <label asp-for="@Model.SelectedCategoryId"></label>
+    <select asp-for="@Model.SelectedCategoryId" asp-items="@Model.Categories"></select>
+    <span asp-validation-for="SelectedCategoryId"></span>
 
-            <button type="submit" class="btn btn-default">Summon Unicorns!</button>
-        </form>
-
-    </div>
-    <!--HERE IS SIDEBOX-->
-    <div class="col-md-3" id="sidebox">
-        <div class="row" id="logobox" style="padding-top:10px">
-            <img src="~/Images/LearnMVClogo.png" width="170" style="float:left" />
-        </div>
-        <!--GO TO RESULTS-->
-        <div class="row" id="sidebarzItemDone" style="padding:5px" onclick=GoToResult()>
-            <h4>
-                Das Resultat
-            </h4>
-        </div>
-        <!--GO TO Create New Stuff-->
-        <div class="row" id="sidebarzItemDone" style="padding:5px" onclick=GoToCreateNew(1)>
-            <h4>
-                Create Category
-            </h4>
-        </div>
-        <!--GO TO Create QuizUnit-->
-        <div class="row" id="sidebarzItemDone" style="padding:5px" onclick=GoToCreateNew(2)>
-            <h4>
-                Create Quizunit!
-            </h4>
-        </div>
-        <!--GO TO Create Question-->
-        <div class="row" id="sidebarzItemDone" style="padding:5px" onclick=GoToCreateNew(3)>
-            <h4>
-                Create Question!
-            </h4>
-        </div>
-        <div>
-            @*@Html.Partial("_Sidebar", Model.SidebarVMList)*@
-        </div>
-    </div> <!--END SIDEBAR-->
-</div> <!--END ROW-->
+    <button type="submit" class="btn btn-default">Summon Unicorns!</button>
+</form>

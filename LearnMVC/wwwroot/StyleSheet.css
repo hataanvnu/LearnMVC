@@ -85,3 +85,15 @@ alert {
     background-color: grey;
     border-radius: 6px;
 }
+
+#knappochhero {
+    margin: 3px;
+    padding: 7px;
+    background-color: #ff70de;
+    opacity: 0.7;
+    border-radius: 3px;
+}
+
+#knappochhero, #sidebarzItem, #sidebarzItemDone {
+    cursor: pointer;
+}

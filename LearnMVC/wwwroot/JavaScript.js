@@ -79,7 +79,7 @@ $(document).ready(function () {
                 data: [40, 60], // INSERT PROGRESS HERE
                 // Notice the borderColor 
                 borderColor: ['black', 'black'],
-                borderWidth: [2, 2]
+                borderWidth: [1, 1]
             }
         ]
     };

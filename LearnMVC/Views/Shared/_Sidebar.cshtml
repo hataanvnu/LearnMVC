@@ -1,5 +1,17 @@
 ﻿@model SidebarVM[]
 <div id="sidebarz">
+    <div class="row" id="knappochhero">
+
+        <div class="col-md-8">
+            <div class="row" onclick="GoToIndex()">
+                <img src="~/Images/super.png" height="40" /> My Profile
+            </div>
+        </div>
+        <div class="col-md-4">
+            <button onclick="Logout()" class="btn btn-default" style="float:right">Log out</button>
+        </div>
+
+    </div>
     @foreach (var category in Model)
     {
         if (category.IsDone)
@@ -7,14 +19,16 @@
             <div id="sidebarzItemDone" onclick="ResetCategory(@category.CategoryID)">
                 <div class="row">
                     <div class="col-md-6">
-                        <p>@category.CategoryName <br />
-                        Completed</p>
-                    </div>
-                    <div class="col-md-5">
-                        <img src="~/Images/Check.png" width="50" style="padding-top:10px;float:right;padding-right:10px;" />
-                    </div>
+                        <p>
+                            @category.CategoryName <br />
+                        Completed
+                    </p>
+                </div>
+                <div class="col-md-5">
+                    <img src="~/Images/Check.png" width="50" style="padding-top:10px;float:right;padding-right:10px;" />
                 </div>
             </div>
+        </div>
         }
         else
         {
@@ -23,8 +37,8 @@
                     <div class="col-md-6">
                         <p>
                             @category.CategoryName <br />
-                        Go!
-                    </p>
+                            Go!
+                        </p>
                     </div>
                     <div class="col-md-5">
 

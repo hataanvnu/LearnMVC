@@ -122,10 +122,6 @@ namespace LearnMVC.Controllers
                 return View(model);
             }
 
-            // Todo - Kolla om den som loggade in var en admin och skicka i så fall till /Admin/Index istället
-            // Sker i index istället?
-
-
             return RedirectToAction(nameof(Index));
         }
 
@@ -148,7 +144,6 @@ namespace LearnMVC.Controllers
             }
             else
             {
-                // todo - resetta progress
                 context.ResetAllProgressForMember(userManager.GetUserId(User));
                 return RedirectToAction(nameof(Index));
             }

@@ -93,7 +93,6 @@ namespace LearnMVC.Controllers
             }
             else
             {
-                // todo - resetta progress
                 context.ResetCategoryForMember(id, userManager.GetUserId(User));
                 return RedirectToAction(nameof(Text), new { id = id });
             }

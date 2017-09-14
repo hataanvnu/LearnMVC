@@ -280,8 +280,6 @@ namespace LearnMVC.Models.Entities
 
                 if (possibleComingCategories.Count() == 0)
                 {
-                    // Det finns inga mer kategorier att köra
-                    // Todo - är det rimligt att returnera null eller borde jag göra något vettigare?
                     return null;
                 }
                 else

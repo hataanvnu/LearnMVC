@@ -80,3 +80,8 @@ h3, h2, h1 {
 alert {
     background-color: green;
 }
+
+#barChart {
+    background-color: grey;
+    border-radius: 6px;
+}

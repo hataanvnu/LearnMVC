@@ -4,6 +4,9 @@
         <h3>Welcome @Model.UserName</h3>
         <br />
 
+        <!--CHART.JS KOMMER HÄR-->
+        <canvas id="myChart"></canvas>
+
         @if (Model.HasPreviousProgress)
         {
             <div id="progressContent">
@@ -42,3 +45,4 @@
     </div>
 </div>
 </div> <!--END ROW-->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.min.js"></script>

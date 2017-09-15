@@ -147,5 +147,12 @@ namespace LearnMVC.Controllers
 
             return RedirectToAction(nameof(Index));
         }
+
+        public IActionResult Resultat()
+        {
+            AdminResultatVM[] model = context.GetAdminResultatVM(userManager);
+
+            return View(model);
+        }
     }
 }

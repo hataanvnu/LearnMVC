@@ -1,4 +1,5 @@
 ﻿using System;
+using LearnMVC.Models.View_Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 
@@ -126,5 +127,6 @@ namespace LearnMVC.Models.Entities
                     .HasConstraintName("FK__QuizUnit__Catego__0E6E26BF");
             });
         }
+
     }
 }

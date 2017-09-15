@@ -102,3 +102,7 @@ alert {
     background-color: white;
     margin-top: 100px;
 }
+
+#inteCategory > .progress {
+    margin-top: 0px;
+}

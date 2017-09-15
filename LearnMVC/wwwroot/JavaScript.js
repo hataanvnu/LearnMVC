@@ -93,7 +93,7 @@ function LoadChart(doneQuestions, allQuestions) {
             {
                 fill: true,
                 backgroundColor: [
-                    '#ff70de',
+                    '#fd8be3',
                     'white'],
                 data: [doneQuestions, allQuestions], // INSERT PROGRESS HERE
                 // Notice the borderColor 

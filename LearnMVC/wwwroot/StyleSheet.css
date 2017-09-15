@@ -103,6 +103,11 @@ alert {
     margin-top: 100px;
 }
 
+#inteCategory > .progress {
+    margin-top: 0px;
+}
+}
+
 #headbar {
     background-color: whitesmoke;
     padding: 3px;

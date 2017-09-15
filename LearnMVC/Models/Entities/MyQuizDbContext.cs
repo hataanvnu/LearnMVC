@@ -5,6 +5,7 @@ using LearnMVC.Models.View_Models;
 using System.Linq;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.AspNetCore.Identity;
 
 namespace LearnMVC.Models.Entities
 {
@@ -710,6 +711,35 @@ namespace LearnMVC.Models.Entities
             };
 
             return model;
+        }
+
+
+        internal AdminResultatVM[] GetAdminResultatVM(UserManager<IdentityUser> userManager)
+        {
+            List<AdminResultatVM> adminResultatList = new List<AdminResultatVM>();
+
+            var totalNumberOfQuestions = Question.Count();
+
+
+
+
+            var listOfMember = userManager.Users.Select(u => new { u.UserName, u.Id });
+
+
+            foreach (var member in listOfMember)
+            {
+                double q = Progress
+                    .Where(p => p.MemberId == member.Id)
+                    .Count();
+
+                adminResultatList.Add(new AdminResultatVM
+                {
+                    Name = member.UserName,
+                    ProgressPercentage = Math.Round(100.0 * q / totalNumberOfQuestions),
+                });
+            }
+
+            return adminResultatList.ToArray();
         }
     }
 }

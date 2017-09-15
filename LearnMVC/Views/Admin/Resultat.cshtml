@@ -2,4 +2,14 @@
     Layout = "_Admin_Layout";
 }
 
-This is Resultat.
+@model AdminResultatVM[]
+
+<h3>Here you can see the progress of our members! Aren't they great?</h3>
+
+@foreach (var item in Model)
+{
+    <div id="inteCategory">
+        <h4>@item.Name</h4>
+        @Html.Partial("CategoryProgress", item.ProgressPercentage)
+    </div>
+}

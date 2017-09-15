@@ -1,15 +1,9 @@
 ﻿@model SidebarVM[]
 <div id="sidebarz">
     <div class="row" id="knappochhero">
-            <div class="row"><h4 style="text-align:center">My Profile</h4></div>
 
-            <div class="row" onclick="GoToIndex()">
-                <div class="col-md-6">
-                    <img src="~/Images/super.png" height="40" style="float:right;padding-right:10px" />
-                </div>
-                <div class="col-md-6">
-                    <button onclick="Logout()" class="btn btn-default" style="float:left;padding-left:10px;padding-top:3px;">Log out</button>
-                </div>
+            <div class="row" onclick="GoToIndex()" style="padding:12px;">
+                <a asp-controller="memberas" asp-action="index">My profile</a> | <a asp-controller="members" asp-action="logout">Log out!</a>
             </div>
         </div>
 

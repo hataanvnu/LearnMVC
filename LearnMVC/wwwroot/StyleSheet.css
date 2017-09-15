@@ -102,3 +102,9 @@ alert {
     background-color: white;
     margin-top: 100px;
 }
+
+#headbar {
+    background-color: whitesmoke;
+    padding: 3px;
+    padding-right: 10px;
+}

@@ -1,6 +1,6 @@
 ﻿@model MembersIndexVM
 
-<div class="container-fluid">
+@*<div class="container-fluid">*@
     <div id="bigwhite" class="col-md-8" style="margin:3%;float:right">
         <h2>Welcome, @Model.UserName !</h2>
         <br />
@@ -47,5 +47,5 @@
             @Html.Partial("_Sidebar", Model.SidebarVMList)
         </div>
     </div>
-</div> <!--END ROW-->
+@*</div>*@ <!--END ROW-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.2.1/Chart.min.js"></script>

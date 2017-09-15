@@ -424,7 +424,16 @@ namespace LearnMVC.Models.Entities
 
         public bool MemberIsAdmin(string v)
         {
-            return (bool)Member.Single(m => m.MemberId == v).IsAdmin;
+            try
+            {
+                return (bool)Member.Single(m => m.MemberId == v).IsAdmin;
+
+            }
+            catch (Exception)
+            {
+
+                return false;
+            }
         }
 
         public void AddNewCategory(AddCategoryVM model)

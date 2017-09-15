@@ -3,14 +3,6 @@
     <div class="row" id="logobox" style="padding-top:10px">
         <img src="~/Images/LearnMVClogo.png" width="170" style="float:left" />
     </div>
-    <div class="row">
-        <div class="col-md-6">
-            <button onclick="Logout()" class="btn btn-default">Log out</button>
-        </div>
-        <div class="col-md-6">
-            Superhero
-        </div>
-    </div>
     <!--GO TO RESULTS-->
     <div class="row" id="sidebarzItemDone" style="padding:5px" onclick=GoToResult()>
         <h4>
@@ -35,7 +27,8 @@
             Create Question!
         </h4>
     </div>
-    <div>
-        @*@Html.Partial("_Sidebar", Model.SidebarVMList)*@
+    <div class="row">
+        <a asp-controller="members" asp-action="logout">Log out</a>
     </div>
+
 </div> <!--END SIDEBAR-->
